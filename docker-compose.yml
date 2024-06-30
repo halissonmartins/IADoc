@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  postgres_application:
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_DB: iadoc_application_db
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: 123456
+    ports:
+      - "5432:5432"
+    expose:
+      - 5432
+    volumes: 
+      - ./database/application_schema_and_data.sql:/docker-entrypoint-initdb.d/application_schema_and_data.sql
+    networks:
+      - iadoc_network
+
+  postgres_document:
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_DB: iadoc_document_db
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: 123456
+    ports:
+      - "5433:5432"
+    expose:
+      - 5433
+    volumes: 
+      - ./database/document_schema_and_data.sql:/docker-entrypoint-initdb.d/document_schema_and_data.sql
+    networks:
+      - iadoc_network
+
+  postgres_question:
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_DB: iadoc_question_db
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: 123456
+    ports:
+      - "5434:5432"
+    expose:
+      - 5434
+    volumes: 
+      - ./database/question_schema_and_data.sql:/docker-entrypoint-initdb.d/question_schema_and_data.sql
+    networks:
+      - iadoc_network
+
+networks:
+  iadoc_network:
+    driver: bridge
