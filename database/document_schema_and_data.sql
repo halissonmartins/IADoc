@@ -8,8 +8,8 @@ CREATE TABLE document.document_status (
 );
 
 -- Criação da tabela documents
-CREATE TABLE application.documents (
-    id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+CREATE TABLE document.documents (
+    id BIGINT PRIMARY KEY,
     name VARCHAR(400) NOT NULL,
 	document_type VARCHAR(40) NOT NULL,
 	document_status_code INT NOT NULL,

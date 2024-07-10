@@ -1,0 +1,20 @@
+{
+  "name": "to-document-documents-sink",
+  "config": {
+    "name": "to-document-documents-sink",
+    "connector.class": "io.confluent.connect.jdbc.JdbcSinkConnector",
+    "connection.url": "jdbc:postgresql://postgres_document:5432/iadoc_document_db",
+    "connection.user": "user",
+    "connection.password": "123456",
+    "topics": "from.application.documents",
+    "table.name.format": "document.documents",
+	"slot.name": "from_application_connector_slot",
+	"value.converter": "org.apache.kafka.connect.json.JsonConverter",
+	"value.converter.schemas.enable": "true",
+	"transforms":"timestamp",
+	"transforms.timestamp.type":"org.apache.kafka.connect.transforms.TimestampConverter$Value",
+	"transforms.timestamp.target.type":"Timestamp",
+	"transforms.timestamp.field":"created_at",
+	"transforms.timestamp.format":"yyyy-MM-dd HH:mm:ss.SSS"
+  }
+}

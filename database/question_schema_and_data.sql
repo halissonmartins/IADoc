@@ -9,7 +9,7 @@ CREATE TABLE question.document_status (
 
 -- Criação da tabela documents
 CREATE TABLE question.documents (
-    id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    id BIGINT PRIMARY KEY,
     name VARCHAR(400) NOT NULL,
 	document_status_code INT NOT NULL,
 	FOREIGN KEY (document_status_code) REFERENCES question.document_status(code)
@@ -23,14 +23,16 @@ CREATE TABLE question.question_status (
 
 -- Criação da tabela documents
 CREATE TABLE question.questions (
-    id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    id BIGINT PRIMARY KEY,
     question VARCHAR(400) NOT NULL,
 	response VARCHAR(4000),
 	question_status_code INT NOT NULL,
+	document_id BIGINT,
 	created_at TIMESTAMP NOT NULL,
 	processing_started_at TIMESTAMP,
 	answered_at TIMESTAMP,
-	FOREIGN KEY (question_status_code) REFERENCES question.question_status(code)
+	FOREIGN KEY (question_status_code) REFERENCES question.question_status(code),
+	FOREIGN KEY (document_id) REFERENCES question.documents(id)
 );
 
 BEGIN;

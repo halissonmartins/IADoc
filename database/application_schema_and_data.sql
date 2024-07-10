@@ -30,9 +30,11 @@ CREATE TABLE application.questions (
     question VARCHAR(400) NOT NULL,
 	response VARCHAR(4000),
 	question_status_code INT NOT NULL,
+	document_id BIGINT,
 	created_at TIMESTAMP NOT NULL,
 	answered_at TIMESTAMP,
-	FOREIGN KEY (question_status_code) REFERENCES application.question_status(code)
+	FOREIGN KEY (question_status_code) REFERENCES application.question_status(code),
+	FOREIGN KEY (document_id) REFERENCES application.documents(id)
 );
 
 BEGIN;

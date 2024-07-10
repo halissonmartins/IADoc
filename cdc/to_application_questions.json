@@ -1,0 +1,23 @@
+{
+  "name": "to-application-questions-sink",
+  "config": {
+    "name": "to-application-questions-sink",
+    "connector.class": "io.confluent.connect.jdbc.JdbcSinkConnector",
+    "connection.url": "jdbc:postgresql://postgres_application:5432/iadoc_application_db",
+    "connection.user": "user",
+    "connection.password": "123456",
+    "topics": "from.question.questions",
+    "table.name.format": "application.questions",
+	"slot.name": "from_question_questions_connector_slot",
+	"value.converter": "org.apache.kafka.connect.json.JsonConverter",
+	"value.converter.schemas.enable": "true",
+	"transforms":"timestamp",
+	"transforms.timestamp.type":"org.apache.kafka.connect.transforms.TimestampConverter$Value",
+	"transforms.timestamp.target.type":"Timestamp",
+	"transforms.timestamp.field":"answered_at",
+	"transforms.timestamp.format":"yyyy-MM-dd HH:mm:ss.SSS",
+	"insert.mode": "update",
+	"pk.mode": "record_value",
+	"pk.fields": "id"
+  }
+}

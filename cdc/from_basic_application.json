@@ -1,0 +1,29 @@
+{
+  "name": "from-basic-application-connector",
+  "config": {
+    "connector.class": "io.debezium.connector.postgresql.PostgresConnector",
+    "tasks.max": "1",
+    "database.hostname": "postgres_application",
+    "database.port": "5432",
+    "database.user": "user",
+    "database.password": "123456",
+	"database.dbname": "iadoc_application_db",
+	"database.server.name": "postgres_application",
+    "schema.history.internal.kafka.bootstrap.servers": "kafka:9092",
+    "schema.history.internal.kafka.topic": "history.iadoc_basic_application",
+    "database.server.id": "184055",
+	"database.allowPublicKeyRetrieval": "true",
+	"schema.include.list": "application",
+	"table.include.list": "application.documents",
+	"column.exclude.list": "application.documents.document_type,application.documents.created_at,application.documents.processed_at",
+	"tombstones.on.delete": "false",
+    "topic.prefix": "from-basic",
+    "transforms": "unwrap",
+	"plugin.name": "pgoutput",
+    "transforms.unwrap.type": "io.debezium.transforms.ExtractNewRecordState",
+	"slot.name": "from_basic_application_connector_slot",
+	"value.converter": "org.apache.kafka.connect.json.JsonConverter",
+	"value.converter.schemas.enable": "true",
+	"time.precision.mode":"connect"
+  }
+}
