@@ -1,0 +1,134 @@
+{
+	"info": {
+		"_postman_id": "862d2bc4-98dd-43cb-9bf7-01a3f0f3611b",
+		"name": "IA Documents",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23150615"
+	},
+	"item": [
+		{
+			"name": "POST Create Question",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"question\": \"Sua pergunta aqui?\",\r\n    \"documentId\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8501/questions",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8501",
+					"path": [
+						"questions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST Create Question Without Document",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"question\": \"Como instalar uma memória RAM em um notebook Dell?\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8501/questions",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8501",
+					"path": [
+						"questions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET List All Questions",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8501/questions",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8501",
+					"path": [
+						"questions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Find Questions by Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8501/questions/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8501",
+					"path": [
+						"questions",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST Upload Document",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "files",
+							"type": "file",
+							"src": []
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8501/upload",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8501",
+					"path": [
+						"upload"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

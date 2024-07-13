@@ -123,8 +123,6 @@ services:
       CONNECT_PLUGIN_PATH: /usr/share/java,/usr/share/confluent-hub-components,/data/connect-jars,/etc/kafka-connect/jars
       CONNECT_REST_ADVERTISED_HOST_NAME: "kafka-connect"
       CONNECT_VALUE_CONVERTER_SCHEMAS_ENABLE: false
-    volumes:
-      - ./jars:/etc/kafka-connect/jars
     command:
       - bash
       - -c

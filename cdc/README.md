@@ -1,6 +1,8 @@
 ## Como Executar o kafka consumer
 
 - Executar os seguintes comandos no console do container kafka:
+
+* Dentro do container do Kafka executar os seguintes comandos para criar consumidores de teste e visualizar os eventos:
 ```
 cd opt/bitnami/kafka/bin
 
@@ -15,8 +17,12 @@ kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic from.questio
 
 ```
 
+- Comando para conferir se o container do kafka-connect está ON ou se o conector foi adicionado com sucesso:
+```
+curl -X GET  -H  "Content-Type:application/json" http://localhost:8083/connectors
+```
 
-- Adicionar os conectores do postgres:
+- Comandos para adicionar os conectores do postgres no container do kafka-connect:
 ```
 curl -X POST  -H  "Content-Type:application/json" http://localhost:8083/connectors -d @from_application.json
 
@@ -31,11 +37,6 @@ curl -X POST  -H  "Content-Type:application/json" http://localhost:8083/connecto
 curl -X POST  -H  "Content-Type:application/json" http://localhost:8083/connectors -d @to_question_documents.json
 
 curl -X POST  -H  "Content-Type:application/json" http://localhost:8083/connectors -d @to_question_questions.json
-```
-
-- Conferir se o conector foi adicionado com sucesso:
-```
-curl -X GET  -H  "Content-Type:application/json" http://localhost:8083/connectors
 ```
 
 - Script para testar se o CDC está funcionando corretamente:

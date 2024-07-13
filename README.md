@@ -1,12 +1,103 @@
 # IADoc
-Projeto que processa documentos usando inteligência arficial
+Projeto consiste de 3 microserviços: Aplicação (upload de documentos e cadastro de perguntas), Documentos (processamento dos documentos) e Perguntas (processamento das perguntas).
 
+O microserviço de aplicação é responsável por fazer o upload de documentos PDF e o cadastro de perguntas sobre os respectivos através de API REST.
+Para fazer a replicação dos dados para os microserviços de documentos e perguntas utilzei a estratégia CDC (change data capture), onde foi utilizado Confluent Kafka Connect e o plugin do Debezium para o PostgreSQL.
+Para racionalizar o uso da GPU os documentos e perguntas não são processados em tempo real. Eles são amarzenados e replicados para os respectivos microserviços.
+No microserviço de documentos foi criado um JOB com Spring Batch para fazer a geração aumentada de recuperação (Retrieval-Augmented Generation, RAG) nos documentos e REDIS no armazemento em forma de vetor.
+No microserviço de perguntas foi criado outro JOB com Spring Batch para responder as perguntas cadastradas. Os dados para respostas mais precisas são recuperados do VectorDB (REDIS), colocados em template e o Spring AI realiza o chat com o modelo Llama3 para obter as respostas.
+
+# Programas que precisam ser instalados e iniciados previamente
+- Docker Desktop
+- Ollama
+
+# Antes de iniciar a execução
+- Crie dois diretórios diferentes (ex: /recebidos e /processados) em uma pasta temporária.
+- Criar as variáveis de ambiente UPLOAD_RECEIVED_DIR e PROCESSED_DIR, com os diretórios para recepção(/recebidos) e guarda(/processados) dos arquivos processados.
+- Faça o donwload do modelo llama3
+	```sh
+	ollama pull llama3
+	```
+
+# Passos para execução
+- No terminal execute o seguinte comando: docker compose up -d
+- Aguarde um momento para o kafka-connect inicializar completamente
+- No terminal acesse a pasta do projeto e execute os seguintes comandos para adicionar os conectores do postgres no container do kafka-connect:
+	```sh
+	curl -X POST  -H  "Content-Type:application/json" http://localhost:8083/connectors -d @./cdc/from_application.json
+	
+	curl -X POST  -H  "Content-Type:application/json" http://localhost:8083/connectors -d @./cdc/from_basic_application.json
+	
+	curl -X POST  -H  "Content-Type:application/json" http://localhost:8083/connectors -d @./cdc/from_document_documents.json
+	
+	curl -X POST  -H  "Content-Type:application/json" http://localhost:8083/connectors -d @./cdc/from_question_questions.json
+	
+	curl -X POST  -H  "Content-Type:application/json" http://localhost:8083/connectors -d @./cdc/to_document_documents.json
+	
+	curl -X POST  -H  "Content-Type:application/json" http://localhost:8083/connectors -d @./cdc/to_question_documents.json
+	
+	curl -X POST  -H  "Content-Type:application/json" http://localhost:8083/connectors -d @./cdc/to_question_questions.json
+	```
+
+- Iniciar o microserviço de aplicação
+- Iniciar o microserviço de documentos
+- Iniciar o microserviço de perguntas
+- Fazer o upload de um documento PDF:
+	```sh
+	curl --location 'http://localhost:8501/upload' --form 'files=@"/algumArquivoPdf.pdf"'
+	```
+
+- Cadastrar uma pergunta relacionada ao documento PDF:
+	```sh
+	curl --location 'http://localhost:8501/questions' --header 'Content-Type: application/json' \
+	--data '{
+		"question": "Sua pergunta?",
+		"documentId": 1
+	}'
+	``` 
+
+- Após o processamento do documento, a pergunta será respondida
+- Consultar a pergunta
+	```sh
+	curl --location 'http://localhost:8501/questions/1'
+	```
+
+- No terminal execute o comando para finalizar todos os containers: docker-compose down
+
+> Nota: Dentro do projeto tem a coleção com todas as requisições REST para importar no Postman ou Insomia.
 
 # Referências
 
+## CDC
+https://debezium.io/documentation/reference/stable/
+
+https://developers.redhat.com/articles/2023/07/06/how-use-debezium-smt-groovy-filter-routing-events
+
+https://youtu.be/0_Fm-xr3LY8?si=v2rjM9mDmOb1icrA
+
+
+## Spring AI e VectorDB
+
+https://youtu.be/4-rG2qsTrAs?si=0LFTj5qkzjGwMFxT
+
+https://youtu.be/ZoPVGrB8iHU?si=zNmMAC6962DvcsMl
+
+https://docs.spring.io/spring-ai/reference/index.html
+
+
 ## Upload de arquivos
 https://spring.io/guides/gs/uploading-files
+
 https://medium.com/@patelsajal2/how-to-create-a-spring-boot-rest-api-for-multipart-file-uploads-a-comprehensive-guide-b4d95ce3022b
 
-# Spring Batch
+## Spring Batch
 https://spring.io/guides/gs/batch-processing
+
+https://www.toptal.com/spring/spring-batch-tutorial
+
+https://medium.com/@rostyslav.ivankiv/introduction-to-spring-batch-a2f39454573f
+
+https://tucanoo.com/spring-batch-example-building-a-bulk-contact-importer/
+
+# TODO
+- Criar um container para servir como File Server e não ser nescessário guardar os arquivos em diretórios.
