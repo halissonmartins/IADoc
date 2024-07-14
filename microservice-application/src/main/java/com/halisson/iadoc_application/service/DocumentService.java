@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.halisson.iadoc_application.dto.DocumentDto;
 import com.halisson.iadoc_application.entity.Document;
 import com.halisson.iadoc_application.repository.DocumentRepository;
 import com.halisson.iadoc_application.storage.StorageService;
@@ -43,8 +44,12 @@ public class DocumentService {
 		storageService.storeBatch(files);
 	}
 	
-	public List<String> listAllNames(){
-		return documentRepository.findAll().stream().map(Document::getName).collect(Collectors.toList());
+	public List<DocumentDto> findAll() {
+		return documentRepository.findAll().stream().map(DocumentDto::new).collect(Collectors.toList());
+	}
+	
+	public DocumentDto findById(Long id) {
+		return new DocumentDto(documentRepository.findById(id).get());
 	}
 	
 }

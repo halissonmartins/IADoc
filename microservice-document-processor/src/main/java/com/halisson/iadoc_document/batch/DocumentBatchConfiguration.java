@@ -40,7 +40,6 @@ public class DocumentBatchConfiguration {
 
 	private final JobExplorer jobs;
 	private final VectorStore vectorStore;
-	private final DocumentRepository documentRepository;
 	private final PdfDocumentReaderConfig pdfConfig;
 	private final String receivedDir;
 	private final String processedDir;
@@ -56,7 +55,6 @@ public class DocumentBatchConfiguration {
 		this.jobs = jobs;
 		this.vectorStore = vectorStore;
 		this.pdfConfig = pdfConfig;
-		this.documentRepository = documentRepository;
 		this.receivedDir = receivedDir;
 		this.processedDir = processedDir;
 	}
