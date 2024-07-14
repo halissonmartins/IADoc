@@ -101,7 +101,10 @@ https://medium.com/@rostyslav.ivankiv/introduction-to-spring-batch-a2f39454573f
 
 https://tucanoo.com/spring-batch-example-building-a-bulk-contact-importer/
 
+https://stackoverflow.com/questions/29286699/repeating-a-step-x-times-in-spring-batch
+
 # TODO
 - Criar um contêiner para servir como File Server e não ser necessário guardar os arquivos em diretórios.
 - Implementar o deploy usando Kubernetes
 - Implementar um biblioteca para evitar a duplicação de código
+- Criar um Swagger

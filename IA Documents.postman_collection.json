@@ -82,6 +82,25 @@
 			"response": []
 		},
 		{
+			"name": "GET List All Documents",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8501/documents",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8501",
+					"path": [
+						"documents"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "GET Find Questions by Id",
 			"request": {
 				"method": "GET",
@@ -95,6 +114,26 @@
 					"port": "8501",
 					"path": [
 						"questions",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Find Documents by Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8501/documents/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8501",
+					"path": [
+						"documents",
 						"1"
 					]
 				}
