@@ -1,5 +1,5 @@
 # IADoc
-Projeto consiste em 3 microsserviços: Aplicação (upload de documentos e cadastro de perguntas), Documentos (processamento dos documentos) e Perguntas (processamento das perguntas).
+Projeto consiste em 3 microsserviços principais: Aplicação (upload de documentos e cadastro de perguntas), Documentos (processamento dos documentos) e Perguntas (processamento das perguntas).
 
 O microserviço de aplicação é responsável por fazer o upload de documentos PDF e o cadastro de perguntas sobre os respectivos através de API REST.
 Para fazer a replicação dos dados para os microsserviços de documentos e perguntas utilizei a estratégia CDC (change data capture), onde foi utilizado Confluent Kafka Connect e o plugin do Debezium para o PostgreSQL.
@@ -14,6 +14,10 @@ No microserviço de perguntas foi criado outro JOB com Spring Batch para respond
 # Antes de iniciar a execução
 - Crie dois diretórios diferentes (ex: /recebidos e /processados) em uma pasta temporária.
 - Criar as variáveis de ambiente UPLOAD_RECEIVED_DIR e PROCESSED_DIR, com os diretórios para recepção(/recebidos) e guarda(/processados) dos arquivos processados.
+	```sh
+	comando para criar as pastas
+	comando para criar as variáveis de ambiente
+	```
 - Faça o download do modelo llama3
 	```sh
 	ollama pull llama3
@@ -104,7 +108,10 @@ https://tucanoo.com/spring-batch-example-building-a-bulk-contact-importer/
 https://stackoverflow.com/questions/29286699/repeating-a-step-x-times-in-spring-batch
 
 # TODO
-- Criar um contêiner para servir como File Server e não ser necessário guardar os arquivos em diretórios.
+- Criar um contêiner para servir como File Server e não ser necessário guardar os arquivos em diretórios
+- Usar o plugin para criar os containers das aplicações Spring Boot
 - Implementar o deploy usando Kubernetes
 - Implementar um biblioteca para evitar a duplicação de código
 - Criar um Swagger
+- Testar com o modelo Phi3
+- Criar um diagrama para o CDC
