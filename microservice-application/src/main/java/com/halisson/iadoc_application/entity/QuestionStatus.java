@@ -15,7 +15,7 @@ import jakarta.persistence.Table;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(schema = "application", name = "document_status")
+@Table(schema = "application", name = "question_status")
 public class QuestionStatus implements Serializable {
 
 	/**

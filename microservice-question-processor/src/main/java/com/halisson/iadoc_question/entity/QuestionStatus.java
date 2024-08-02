@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(schema = "question", name = "document_status")
+@Table(schema = "question", name = "question_status")
 public class QuestionStatus implements Serializable {
 
 	/**

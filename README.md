@@ -112,6 +112,7 @@ https://stackoverflow.com/questions/29286699/repeating-a-step-x-times-in-spring-
 - Usar o plugin para criar os containers das aplicações Spring Boot
 - Implementar o deploy usando Kubernetes
 - Implementar um biblioteca para evitar a duplicação de código
-- Criar um Swagger
+- Criar um Swagger usando a biblioteca do Spring Boot
 - Testar com o modelo Phi3
 - Criar um diagrama para o CDC
+- Escrever os testes unitários
