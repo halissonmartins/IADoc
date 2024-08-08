@@ -25,9 +25,9 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.transaction.PlatformTransactionManager;
 
 import com.halisson.iadoc_document.entity.Document;
-import com.halisson.iadoc_document.enums.StepBatchStatus;
 import com.halisson.iadoc_document.repository.DocumentRepository;
 import com.halisson.iadoc_library.enums.EnumDocumentStatus;
+import com.halisson.iadoc_library.enums.StepBatchStatus;
 
 import jakarta.annotation.PreDestroy;
 import lombok.extern.slf4j.Slf4j;

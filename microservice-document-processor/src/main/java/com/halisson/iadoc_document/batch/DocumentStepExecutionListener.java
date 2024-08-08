@@ -6,7 +6,7 @@ import org.springframework.batch.core.StepExecutionListener;
 import org.springframework.batch.core.explore.JobExplorer;
 import org.springframework.stereotype.Component;
 
-import com.halisson.iadoc_document.enums.StepBatchStatus;
+import com.halisson.iadoc_library.enums.StepBatchStatus;
 
 @Component
 public class DocumentStepExecutionListener implements StepExecutionListener {

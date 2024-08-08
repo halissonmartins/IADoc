@@ -4,8 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.prompt.PromptTemplate;
 import org.springframework.ai.document.Document;
@@ -16,39 +14,36 @@ import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 
 import jakarta.validation.constraints.NotBlank;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Service
-public class ChatService {
+public class ChatService extends AbstractChatService{
 	
-	private static final Logger logger = LoggerFactory.getLogger(ChatService.class);
-
-	private final ChatClient chatClient;
 	private final VectorStore vectorStore;
 	
 	@Value("classpath:/prompts/template-reference.st")
 	private Resource sbPromptTemplate;
 
 	public ChatService(ChatClient.Builder chatClientBuilder, VectorStore vectorStore) {
-		super();
-		this.chatClient = chatClientBuilder.build();
+		super(chatClientBuilder.build());
 		this.vectorStore = vectorStore;
 	}
 
 	public String answerQuestion(@NotBlank String message) {
 		
-		logger.info(message);
+		log.info(message);
 		
 		PromptTemplate promptTemplate = new PromptTemplate(sbPromptTemplate);
 		
 		Map<String, Object> promptParameters = new HashMap<>();
 		promptParameters.put("input", message);
-		promptParameters.put("documents", String.join("\n", findSimilarDocuments(message)));
 		
-		String content = chatClient.prompt(promptTemplate.create(promptParameters)).call().content();
+		String documents = String.join("\n", findSimilarDocuments(message));
+		log.info("Documentos:", documents);
+		promptParameters.put("documents", documents);
 		
-		logger.info(content);
-		
-		return content;
+		return prompt(promptTemplate, promptParameters);
 
 	}
 

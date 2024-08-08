@@ -23,10 +23,11 @@ import org.springframework.transaction.PlatformTransactionManager;
 
 import com.halisson.iadoc_library.enums.EnumDocumentStatus;
 import com.halisson.iadoc_library.enums.EnumQuestionStatus;
+import com.halisson.iadoc_library.enums.StepBatchStatus;
 import com.halisson.iadoc_question.entity.Question;
-import com.halisson.iadoc_question.enums.StepBatchStatus;
 import com.halisson.iadoc_question.repository.QuestionRepository;
 import com.halisson.iadoc_question.service.ChatService;
+import com.halisson.iadoc_question.service.ChatServiceWithoutDocument;
 
 import jakarta.annotation.PreDestroy;
 import lombok.extern.slf4j.Slf4j;
@@ -39,11 +40,16 @@ public class QuestionBatchConfiguration {
 
 	private final JobExplorer jobs;
 	private final ChatService chatService;
+	private final ChatServiceWithoutDocument chatServiceWithoutDocument;
 	
-	public QuestionBatchConfiguration(JobExplorer jobs, ChatService chatService) {
+	public QuestionBatchConfiguration(
+			JobExplorer jobs, 
+			ChatService chatService, 
+			ChatServiceWithoutDocument chatServiceWithoutDocument) {
 		super();
 		this.jobs = jobs;
 		this.chatService = chatService;
+		this.chatServiceWithoutDocument = chatServiceWithoutDocument;
 	}
 
 	@Bean
@@ -121,7 +127,7 @@ public class QuestionBatchConfiguration {
 	
 	@Bean
 	QuestionItemProcessor processorDocument() {
-		return new QuestionItemProcessor(chatService);
+		return new QuestionItemProcessor(chatService, chatServiceWithoutDocument);
 	}
 	
 	@Bean
@@ -143,7 +149,6 @@ public class QuestionBatchConfiguration {
 			@Qualifier("processorStepQuestionWithDocument") Step step4, 
 			JobCompletionNotificationListener listener) {
 		return new JobBuilder(JOB_NAME, jobRepository)
-				//.listener(new QuestionJobExecutionListener(jobs))
 				.listener(listener)
 				.start(step1).on(StepBatchStatus.CONTINUE.name()).to(step2)
 				.from(step1).on(StepBatchStatus.FINISHED.name()).end()
@@ -210,13 +215,6 @@ public class QuestionBatchConfiguration {
 				.build();
 	}
 	
-	
-	
-	
-	
-	
-	
-
 	@PreDestroy
 	public void destroy() throws NoSuchJobException {
 
