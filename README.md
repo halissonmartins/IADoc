@@ -4,8 +4,9 @@ Projeto consiste em 3 microsserviços principais: Aplicação (upload de documen
 O microserviço de aplicação é responsável por fazer o upload de documentos PDF e o cadastro de perguntas sobre os respectivos através de API REST.
 Para fazer a replicação dos dados para os microsserviços de documentos e perguntas utilizei a estratégia CDC (change data capture), onde foi utilizado Confluent Kafka Connect e o plugin do Debezium para o PostgreSQL.
 Para racionalizar o uso da GPU os documentos e perguntas não são processados em tempo real. Eles são armazenados e replicados para os respectivos microsserviços.
-No microserviço de documentos foi criado um JOB com Spring Batch para fazer a geração aumentada de recuperação (Retrieval-Augmented Generation, RAG) nos documentos e REDIS no armazenamento em forma de vetor.
-No microserviço de perguntas foi criado outro JOB com Spring Batch para responder às perguntas cadastradas. Os dados para respostas mais precisas são recuperados do VectorDB (REDIS), colocados em template e o Spring AI realiza o chat com o modelo Llama3 para obter as respostas.
+No microserviço de documentos foi criado um JOB com Spring Batch para fazer a geração argumentada de recuperação (Retrieval-Augmented Generation, RAG) nos documentos e REDIS no armazenamento em forma de vetor.
+No microserviço de perguntas foi criado outro JOB com Spring Batch para responder às perguntas cadastradas. 
+Os dados para respostas mais precisas são recuperados do VectorDB (REDIS), colocados em template e o Spring AI realiza o chat com o modelo Llama3 para obter as respostas.
 
 # Programas que precisam ser instalados e iniciados previamente
 - Docker Desktop
@@ -13,9 +14,12 @@ No microserviço de perguntas foi criado outro JOB com Spring Batch para respond
 
 # Antes de iniciar a execução
 - Crie dois diretórios diferentes (ex: /recebidos e /processados) em uma pasta temporária.
-- Criar as variáveis de ambiente UPLOAD_RECEIVED_DIR e PROCESSED_DIR, com os diretórios para recepção(/recebidos) e guarda(/processados) dos arquivos processados.
 	```sh
 	comando para criar as pastas
+	```
+
+- Criar as variáveis de ambiente UPLOAD_RECEIVED_DIR e PROCESSED_DIR, com os diretórios para recepção(/recebidos) e guarda(/processados) dos arquivos processados.
+	```sh
 	comando para criar as variáveis de ambiente
 	```
 - Faça o download do modelo llama3

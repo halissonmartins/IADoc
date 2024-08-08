@@ -65,6 +65,12 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		
+		<!-- Internal dependencies -->
+		<dependency>
+			<groupId>com.halisson.iadoc</groupId>
+			<artifactId>iadoc-library</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>

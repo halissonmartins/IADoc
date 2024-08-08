@@ -2,7 +2,7 @@ package com.halisson.iadoc_application.entity;
 
 import java.io.Serializable;
 
-import com.halisson.iadoc_application.enums.EnumDocumentStatus;
+import com.halisson.iadoc_library.enums.EnumDocumentStatus;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

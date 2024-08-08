@@ -2,7 +2,7 @@ package com.halisson.iadoc_question.entity;
 
 import java.io.Serializable;
 
-import com.halisson.iadoc_question.enums.EnumQuestionStatus;
+import com.halisson.iadoc_library.enums.EnumQuestionStatus;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

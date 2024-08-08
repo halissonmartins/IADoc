@@ -6,7 +6,7 @@ import org.springframework.batch.item.ItemProcessor;
 
 import com.halisson.iadoc_document.entity.Document;
 import com.halisson.iadoc_document.entity.DocumentStatus;
-import com.halisson.iadoc_document.enums.EnumDocumentStatus;
+import com.halisson.iadoc_library.enums.EnumDocumentStatus;
 
 import lombok.extern.slf4j.Slf4j;
 

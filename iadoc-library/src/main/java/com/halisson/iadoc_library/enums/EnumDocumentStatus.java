@@ -1,4 +1,4 @@
-package com.halisson.iadoc_application.enums;
+package com.halisson.iadoc_library.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

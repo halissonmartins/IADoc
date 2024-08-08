@@ -66,6 +66,13 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
+				
+		<!-- Internal dependencies -->
+		<dependency>
+			<groupId>com.halisson.iadoc</groupId>
+			<artifactId>iadoc-library</artifactId>
+		</dependency>
+		
 	</dependencies>
 
 	<build>

@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
 
-import com.halisson.iadoc_application.enums.EnumQuestionStatus;
+import com.halisson.iadoc_library.enums.EnumQuestionStatus;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

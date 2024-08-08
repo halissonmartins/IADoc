@@ -4,9 +4,9 @@ import java.time.LocalDateTime;
 
 import org.springframework.batch.item.ItemProcessor;
 
+import com.halisson.iadoc_library.enums.EnumQuestionStatus;
 import com.halisson.iadoc_question.entity.Question;
 import com.halisson.iadoc_question.entity.QuestionStatus;
-import com.halisson.iadoc_question.enums.EnumQuestionStatus;
 
 import lombok.extern.slf4j.Slf4j;
 

@@ -21,9 +21,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.transaction.PlatformTransactionManager;
 
+import com.halisson.iadoc_library.enums.EnumDocumentStatus;
+import com.halisson.iadoc_library.enums.EnumQuestionStatus;
 import com.halisson.iadoc_question.entity.Question;
-import com.halisson.iadoc_question.enums.EnumDocumentStatus;
-import com.halisson.iadoc_question.enums.EnumQuestionStatus;
 import com.halisson.iadoc_question.enums.StepBatchStatus;
 import com.halisson.iadoc_question.repository.QuestionRepository;
 import com.halisson.iadoc_question.service.ChatService;
