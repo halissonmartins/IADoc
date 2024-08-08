@@ -115,7 +115,6 @@ https://stackoverflow.com/questions/29286699/repeating-a-step-x-times-in-spring-
 - Criar um contêiner para servir como File Server e não ser necessário guardar os arquivos em diretórios
 - Usar o plugin para criar os containers das aplicações Spring Boot
 - Implementar o deploy usando Kubernetes
-- Implementar um biblioteca para evitar a duplicação de código
 - Criar um Swagger usando a biblioteca do Spring Boot
 - Testar com o modelo Phi3
 - Criar um diagrama para o CDC
