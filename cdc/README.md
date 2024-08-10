@@ -32,6 +32,10 @@ curl -X POST  -H  "Content-Type:application/json" http://localhost:8083/connecto
 
 curl -X POST  -H  "Content-Type:application/json" http://localhost:8083/connectors -d @from_question_questions.json
 
+curl -X POST  -H  "Content-Type:application/json" http://localhost:8083/connectors -d @to_application_documents.json
+
+curl -X POST  -H  "Content-Type:application/json" http://localhost:8083/connectors -d @to_application_questions.json
+
 curl -X POST  -H  "Content-Type:application/json" http://localhost:8083/connectors -d @to_document_documents.json
 
 curl -X POST  -H  "Content-Type:application/json" http://localhost:8083/connectors -d @to_question_documents.json

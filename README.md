@@ -8,6 +8,9 @@ No microserviço de documentos foi criado um JOB com Spring Batch para fazer a g
 No microserviço de perguntas foi criado outro JOB com Spring Batch para responder às perguntas cadastradas. 
 Os dados para respostas mais precisas são recuperados do VectorDB (REDIS), colocados em template e o Spring AI realiza o chat com o modelo Llama3 para obter as respostas.
 
+# Fluxo de dados entre as bases com o CDC
+![Alt text](/asserts/images/FluxoDadosCDC.jpg?raw=true "Diagrama representando o fluxo dos dados entre as bases")
+
 # Programas que precisam ser instalados e iniciados previamente
 - Docker Desktop
 - Ollama
@@ -117,5 +120,4 @@ https://stackoverflow.com/questions/29286699/repeating-a-step-x-times-in-spring-
 - Implementar o deploy usando Kubernetes
 - Criar um Swagger usando a biblioteca do Spring Boot
 - Testar com o modelo Phi3
-- Criar um diagrama para o CDC
 - Escrever os testes unitários
