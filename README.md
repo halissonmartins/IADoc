@@ -88,6 +88,10 @@ https://developers.redhat.com/articles/2023/07/06/how-use-debezium-smt-groovy-fi
 
 https://youtu.be/0_Fm-xr3LY8?si=v2rjM9mDmOb1icrA
 
+https://medium.com/trendyol-tech/debezium-with-simple-message-transformation-smt-4f5a80c85358
+
+
+
 
 ## Spring AI e VectorDB
 
