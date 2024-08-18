@@ -120,6 +120,7 @@ https://stackoverflow.com/questions/29286699/repeating-a-step-x-times-in-spring-
 
 # TODO
 - Criar um contêiner para servir como File Server e não ser necessário guardar os arquivos em diretórios
+	* https://docs.spring.io/spring-integration/reference/smb.html
 - Usar o plugin para criar os containers das aplicações Spring Boot
 - Implementar o deploy usando Kubernetes
 - Criar um Swagger usando a biblioteca do Spring Boot
