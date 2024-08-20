@@ -21,6 +21,7 @@
 		<spring-cloud.version>2023.0.2</spring-cloud.version>
 		<spring-cloud-netflix.version>4.1.2</spring-cloud-netflix.version>
 		<spring-batch.version>5.1.2</spring-batch.version>
+		<spring-doc.version>2.6.0</spring-doc.version>
 	</properties>
 
 	<dependencyManagement>
@@ -114,7 +115,13 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-starter-actuator</artifactId>
 				<version>${spring.version}</version>
-			</dependency>		
+			</dependency>
+			
+			<dependency>
+			    <groupId>org.springdoc</groupId>
+			    <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+			    <version>${spring-doc.version}</version>
+			</dependency>
 			
 			<!-- Import -->	
 			<dependency>
@@ -143,12 +150,6 @@
 				<groupId>org.springframework.batch</groupId>
 				<artifactId>spring-batch-test</artifactId>
 				<version>${spring-batch.version}</version>
-				<scope>test</scope>
-			</dependency>
-			<dependency>
-				<groupId>io.projectreactor</groupId>
-				<artifactId>reactor-test</artifactId>
-				<version>3.6.7</version>
 				<scope>test</scope>
 			</dependency>
 		</dependencies>

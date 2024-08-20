@@ -120,5 +120,4 @@ https://stackoverflow.com/questions/29286699/repeating-a-step-x-times-in-spring-
 	* https://docs.spring.io/spring-integration/reference/smb.html
 - Usar o plugin para criar os containers das aplicações Spring Boot
 - Implementar o deploy usando Kubernetes
-- Criar um Swagger usando a biblioteca do Spring Boot
 - Escrever os testes unitários

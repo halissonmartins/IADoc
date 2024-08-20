@@ -12,12 +12,13 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.halisson.iadoc_application.controller.interfaces.IFileUploadController;
 import com.halisson.iadoc_application.service.DocumentService;
 import com.halisson.iadoc_application.storage.StorageFileNotFoundException;
 
 @RestController
 @RequestMapping("upload")
-public class FileUploadController {
+public class FileUploadController implements IFileUploadController {
 
 	private final DocumentService documentService;
 
@@ -26,6 +27,7 @@ public class FileUploadController {
 		this.documentService = documentService;
 	}
 	
+	@Override
 	@PostMapping()
 	public ResponseEntity<?> handleFilesUpload(@RequestParam("files") MultipartFile[] files,
 			RedirectAttributes redirectAttributes) {
