@@ -95,4 +95,9 @@ public class FileSystemStorageService implements StorageService {
 			throw new StorageException("Could not initialize storage", e);
 		}
 	}
+	
+	@Override
+	public boolean exists() {
+		return Files.exists(rootReceivedDir);
+	}
 }

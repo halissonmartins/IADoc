@@ -46,7 +46,7 @@ public class FileUploadController implements IFileUploadController {
 
 	@ExceptionHandler(StorageFileNotFoundException.class)
 	public ResponseEntity<?> handleStorageFileNotFound(StorageFileNotFoundException exc) {
-		return ResponseEntity.notFound().build();
+		return ResponseEntity.badRequest().body(exc.getMessage());
 	}
 
 }
