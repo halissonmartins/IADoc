@@ -11,10 +11,11 @@
 	<groupId>com.halisson.iadoc</groupId>
 	<artifactId>ia-documents</artifactId>
 	<packaging>pom</packaging>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>${iadoc.version}</version>
 	<name>ia-documents</name>
 	<description>Projeto consiste em 3 microsserviços principais: Aplicação (upload de documentos e cadastro de perguntas), Documentos (processamento dos documentos) e Perguntas (processamento das perguntas)</description>
 	<properties>
+		<iadoc.version>0.0.1.1-SNAPSHOT</iadoc.version>
 		<java.version>21</java.version>
 		<spring.version>3.3.1</spring.version>
 		<spring-ai.version>1.0.0-M1</spring-ai.version>
