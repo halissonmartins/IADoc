@@ -20,8 +20,10 @@ public interface IDocumentController {
 	@Operation(summary = "Get all documents saved.")
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", 
-					description = "List de documents returned successfully.",
-					content = { @Content(mediaType = "application/json", schema = @Schema(implementation = DocumentDto.class)) })
+					description = "List of documents returned successfully.",
+					content = { @Content(mediaType = "application/json", schema = @Schema(implementation = DocumentDto.class)) }),
+			@ApiResponse(responseCode = "400", description = "Bad request occurred."),
+			@ApiResponse(responseCode = "500", description = "Internal error occurred."),
 	})
 	ResponseEntity<List<DocumentDto>> findAll();
 
@@ -29,7 +31,10 @@ public interface IDocumentController {
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", 
 					description = "Document returned successfully.",
-					content = { @Content(mediaType = "application/json", schema = @Schema(implementation = DocumentDto.class)) })
+					content = { @Content(mediaType = "application/json", schema = @Schema(implementation = DocumentDto.class)) }),
+			@ApiResponse(responseCode = "400", description = "Bad request occurred."),
+			@ApiResponse(responseCode = "404", description = "Documento ID not found."),
+			@ApiResponse(responseCode = "500", description = "Internal error occurred."),
 	})
 	ResponseEntity<DocumentDto> findById(@Parameter(description = "ID of document to be searched") Long id);
 

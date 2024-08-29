@@ -45,7 +45,7 @@ public class DocumentItemProcessor implements ItemProcessor<Document, Document> 
 		
 		log.debug("Processing document {}", document.getName());
 		
-		String documentName = document.getName()+"."+document.getDocumentType();
+		var documentName = document.getName()+"."+document.getDocumentType();
 		var source = Paths.get(receivedDir).resolve(documentName);
 				
 		var pdfReader = new PagePdfDocumentReader(loadAsResource(source), pdfConfig);

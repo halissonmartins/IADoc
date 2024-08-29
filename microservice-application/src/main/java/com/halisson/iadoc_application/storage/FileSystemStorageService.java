@@ -15,6 +15,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.FileSystemUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.halisson.iadoc_application.excection.StorageException;
+import com.halisson.iadoc_application.excection.StorageFileNotFoundException;
+
 @Service
 public class FileSystemStorageService implements StorageService {
 
@@ -68,7 +71,7 @@ public class FileSystemStorageService implements StorageService {
 	@Override
 	public Resource loadAsResource(String filename) {
 		try {
-			Path file = load(filename);
+			var file = load(filename);
 			Resource resource = new UrlResource(file.toUri());
 			if(resource.exists() || resource.isReadable()) {
 				return resource;

@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,7 +13,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.halisson.iadoc_application.controller.interfaces.IFileUploadController;
 import com.halisson.iadoc_application.service.DocumentService;
-import com.halisson.iadoc_application.storage.StorageFileNotFoundException;
 
 @RestController
 @RequestMapping("upload")
@@ -28,13 +26,13 @@ public class FileUploadController implements IFileUploadController {
 	}
 	
 	@Override
-	@PostMapping()
+	@PostMapping
 	public ResponseEntity<?> handleFilesUpload(@RequestParam("files") MultipartFile[] files,
 			RedirectAttributes redirectAttributes) {
 		
 		documentService.saveAndStoreBatch(files);
 		
-		String filesNames = Arrays.asList(files).stream()
+		var filesNames = Arrays.asList(files).stream()
 				.map(MultipartFile::getOriginalFilename)
 				.collect(Collectors.joining(", "));		
 		
@@ -42,11 +40,6 @@ public class FileUploadController implements IFileUploadController {
 				"You successfully uploaded " + filesNames + "!");
 		
 		return ResponseEntity.accepted().build();
-	}
-
-	@ExceptionHandler(StorageFileNotFoundException.class)
-	public ResponseEntity<?> handleStorageFileNotFound(StorageFileNotFoundException exc) {
-		return ResponseEntity.badRequest().body(exc.getMessage());
 	}
 
 }

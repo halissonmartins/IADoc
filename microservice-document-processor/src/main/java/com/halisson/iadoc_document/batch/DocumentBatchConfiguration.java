@@ -166,7 +166,7 @@ public class DocumentBatchConfiguration {
 				jobInstance -> {
 					log.info("job instance id {}", jobInstance.getInstanceId());
 				}
-				);
+			);
 	}
 
 }

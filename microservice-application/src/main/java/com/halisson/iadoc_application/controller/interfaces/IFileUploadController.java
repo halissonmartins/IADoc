@@ -15,7 +15,9 @@ public interface IFileUploadController {
 	@Operation(summary = "Save the PDF files in format Multipart")
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "202", description = "The PDF file was uploaded successfully."),
+			@ApiResponse(responseCode = "400", description = "Bad request occurred."),
 			@ApiResponse(responseCode = "404", description = "Unable to upload PDF file."),
+			@ApiResponse(responseCode = "500", description = "Internal error occurred."),
 	})
 	ResponseEntity<?> handleFilesUpload(MultipartFile[] files, RedirectAttributes redirectAttributes);
 

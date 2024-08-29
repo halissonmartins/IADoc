@@ -26,7 +26,7 @@ public class BatchScheduler {
     @Scheduled(fixedRate = 50000)
     public void run() throws Exception {
     	log.info("JOB startup");
-        JobExecution execution = jobLauncher.run(
+        var execution = jobLauncher.run(
         	job,
             new JobParametersBuilder().addLong("uniqueness", System.nanoTime()).toJobParameters()
         );
