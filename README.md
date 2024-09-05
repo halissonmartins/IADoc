@@ -118,6 +118,11 @@ https://stackoverflow.com/questions/29286699/repeating-a-step-x-times-in-spring-
 # TODO
 - Criar um contêiner para servir como File Server e não ser necessário guardar os arquivos em diretórios
 	* https://docs.spring.io/spring-integration/reference/smb.html
-- Usar o plugin para criar os containers das aplicações Spring Boot
 - Implementar o deploy usando Kubernetes
+
+# TODO DESENVOLVIMENTO
 - Escrever os testes unitários
+- Ter campo resposta com BLOB
+- Usar o plugin do MAVEN para criar os containers das aplicações Spring Boot com um profile específico
+- Alterar o arquivo DockerCompose com a versão ao executar profile o plugin do MAVEN
+- Finalizar o README

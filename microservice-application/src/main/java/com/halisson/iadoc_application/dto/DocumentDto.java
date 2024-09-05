@@ -3,6 +3,8 @@ package com.halisson.iadoc_application.dto;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+import org.springframework.hateoas.RepresentationModel;
+
 import com.halisson.iadoc_application.entity.Document;
 
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -10,7 +12,7 @@ import lombok.Data;
 
 @Data
 @Schema(description = "Document properties", name = "Document")
-public class DocumentDto implements Serializable {
+public class DocumentDto extends RepresentationModel<DocumentDto> implements Serializable {
 
 	/**
 	 * 

@@ -5,8 +5,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import com.halisson.iadoc_application.service.DocumentService;
-
 import lombok.extern.slf4j.Slf4j;
 
 @RestControllerAdvice

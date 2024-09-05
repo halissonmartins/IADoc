@@ -59,5 +59,4 @@ public class Question implements Serializable {
 		this.document = documentId != null ? new Document(documentId) : null;
 		this.questionStatus = new QuestionStatus(EnumQuestionStatus.CREATED);
 	}
-
 }

@@ -1,9 +1,11 @@
 package com.halisson.iadoc_application.service;
 
 import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -51,8 +53,12 @@ public class DocumentService {
 		storageService.storeBatch(files);
 	}
 	
-	public List<DocumentDto> findAll() {
-		return documentRepository.findAll().stream().map(DocumentDto::new).collect(Collectors.toList());
+	public Page<DocumentDto> findAll(Integer pageNumber, Integer pageSize) {
+		
+		Sort sort = Sort.by("name").ascending();
+		Pageable sortPageable = PageRequest.of(pageNumber, pageSize, sort);
+		
+		return documentRepository.findAll(sortPageable).map(DocumentDto::new);
 	}
 	
 	public DocumentDto findById(Long id) {
