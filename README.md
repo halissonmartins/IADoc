@@ -118,6 +118,8 @@ https://stackoverflow.com/questions/29286699/repeating-a-step-x-times-in-spring-
 # TODO
 - Criar um contêiner para servir como File Server e não ser necessário guardar os arquivos em diretórios
 	* https://docs.spring.io/spring-integration/reference/smb.html
+	* https://gurselgazii.medium.com/integrating-minio-with-spring-boot-a-guide-to-simplified-object-storage-525d5a7686cc
+	* https://medium.com/@kapincev/a-developers-guide-to-integrating-minio-with-angular-and-spring-boot-3d77c13aefc7 	
 - Implementar o deploy usando Kubernetes
 
 # TODO DESENVOLVIMENTO
