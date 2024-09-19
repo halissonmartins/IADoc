@@ -18,12 +18,14 @@ Os dados para respostas mais precisas são recuperados do VectorDB (REDIS), colo
 # Antes de iniciar a execução
 - Crie dois diretórios diferentes (ex: /recebidos e /processados) em uma pasta temporária.
 	```sh
-	comando para criar as pastas
+	mkdir \tmp\recebidos
+ 	mkdir \tmp\processados
 	```
 
 - Criar as variáveis de ambiente UPLOAD_RECEIVED_DIR e PROCESSED_DIR, com os diretórios para recepção(/recebidos) e guarda(/processados) dos arquivos processados.
 	```sh
-	comando para criar as variáveis de ambiente
+	set UPLOAD_RECEIVED_DIR=C:\tmp\recebidos\
+ 	set PROCESSED_DIR=C:\tmp\processados\
 	```
 - Faça o download do modelo llama3
 	```sh
