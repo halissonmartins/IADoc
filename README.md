@@ -127,7 +127,6 @@ https://stackoverflow.com/questions/29286699/repeating-a-step-x-times-in-spring-
 # TODO DESENVOLVIMENTO
 - Escrever os testes unitários
 - Ter campo resposta com BLOB
-- Usar o plugin do MAVEN para criar os containers das aplicações Spring Boot com um profile específico
 - Alterar o arquivo DockerCompose com a versão ao executar profile o plugin do MAVEN
 - Finalizar o README
 - Atualizar a versão do Spring AI

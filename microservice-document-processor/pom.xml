@@ -7,6 +7,7 @@
 		<artifactId>ia-documents</artifactId>
 		<version>${iadoc.version}</version>
 	</parent>
+	
 	<artifactId>microservice-document-processor</artifactId>
 	<name>microservice-document-processor</name>
 	<description>Document Processor that RAG PDF files to REDIS Vector Database with Spring Batch</description>
@@ -85,6 +86,13 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
+					<image>
+						<name>halissonmartins/${project.artifactId}:${project.version}</name>
+						<env>
+							<BP_JVM_VERSION>${java.version}</BP_JVM_VERSION>
+			            </env>
+					</image>
+					<pullPolicy>IF_NOT_PRESENT</pullPolicy>
 					<excludes>
 						<exclude>
 							<groupId>org.projectlombok</groupId>
@@ -95,27 +103,4 @@
 			</plugin>
 		</plugins>
 	</build>
-	<repositories>
-		<repository>
-			<id>spring-milestones</id>
-			<name>Spring Milestones</name>
-			<url>https://repo.spring.io/milestone</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-	</repositories>
-	<url/>
-	<licenses>
-		<license/>
-	</licenses>
-	<developers>
-		<developer/>
-	</developers>
-	<scm>
-		<connection/>
-		<developerConnection/>
-		<tag/>
-		<url/>
-	</scm>
 </project>
