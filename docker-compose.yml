@@ -6,6 +6,7 @@ services:
       POSTGRES_DB: iadoc_application_db
       POSTGRES_USER: user
       POSTGRES_PASSWORD: 123456
+      TZ: America/Sao_Paulo
     ports:
       - "5432:5432"
     expose:
@@ -27,6 +28,7 @@ services:
       POSTGRES_DB: iadoc_document_db
       POSTGRES_USER: user
       POSTGRES_PASSWORD: 123456
+      TZ: America/Sao_Paulo
     ports:
       - "5433:5432"
     expose:
@@ -48,6 +50,7 @@ services:
       POSTGRES_DB: iadoc_question_db
       POSTGRES_USER: user
       POSTGRES_PASSWORD: 123456
+      TZ: America/Sao_Paulo
     ports:
       - "5434:5432"
     expose:
@@ -136,12 +139,67 @@ services:
         #
         sleep infinity
 
+  minio:
+    image: docker.io/bitnami/minio:latest
+    environment:
+      - MINIO_ROOT_USER=minioadmin
+      - MINIO_ROOT_PASSWORD=minioadmin
+      - MINIO_DEFAULT_BUCKETS=iadoc-bucket
+    volumes:
+      - minio_data:/data
+    ports:
+      - 9000:9000
+      - 9001:9001
+    expose:
+      - 9001 #REMOVER
+    networks:
+      - iadoc_network
+
+  microservice-discovery:
+    image: halissonmartins/microservice-discovery:0.0.1.8-SNAPSHOT
+    ports:
+      - 8761:8761
+    expose:
+      - 8761 #REMOVER
+    environment:
+      TZ: America/Sao_Paulo
+    networks:
+      - iadoc_network
+
+  api-gateway:
+    image: halissonmartins/microservice-api-gateway:0.0.1.8-SNAPSHOT
+    restart: always
+    ports:
+      - 8500:8500
+    expose:
+      - 8500
+    depends_on:
+      - microservice-discovery
+    environment:
+      TZ: America/Sao_Paulo
+      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://microservice-discovery:8761/eureka
+    networks:
+      - iadoc_network
+
+  microservice-application:
+    image: halissonmartins/microservice-application:0.0.1.8-SNAPSHOT
+    restart: always
+    depends_on:
+      - microservice-discovery
+    environment:
+      TZ: America/Sao_Paulo
+      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://microservice-discovery:8761/eureka
+      SPRING.DATASOURCE.URL: jdbc:postgresql://postgres_application:5432/iadoc_application_db
+      UPLOAD_RECEIVED_DIR: /app/documents/received
+    networks:
+      - iadoc_network
+
 networks:
   iadoc_network:
-    driver: bridge
 
 volumes:
   #pgdata_application:
   #pgdata_document:
   #pgdata_question:
   redis-data:
+  minio_data:
