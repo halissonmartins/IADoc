@@ -14,7 +14,7 @@ public class BaseController {
 	}
 
 	@GetMapping("/")
-	public String listUploadedFiles(Model model) throws IOException {
+	public String showUploadForm(Model model) throws IOException {
 		return "uploadForm";
 	}
 

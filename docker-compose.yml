@@ -1,4 +1,59 @@
 services:
+
+  ollama:
+    container_name: ollama
+    restart: unless-stopped
+    image: ollama/ollama:latest
+    runtime: nvidia
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+    volumes:
+      - "./data/ollama:/root/.ollama"
+    ports:
+      - 11434:11434
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    healthcheck:
+      test: ollama list || exit 1
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 10s
+    networks:
+      - iadoc_network
+
+  ollama-models-pull:
+    container_name: ollama-models-pull
+    image: curlimages/curl:latest
+    command: >
+      http://ollama:11434/api/pull -d '{"name":"llama3"}'
+    depends_on:
+      ollama:
+        condition: service_healthy
+    networks:
+      - iadoc_network
+
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:main
+    ports:
+      - "3000:8080"
+    expose:
+      - 3000
+    environment:
+      - OLLAMA_BASE_URL=http://ollama:11434
+    volumes:
+      - ./data/open-webui:/app/backend/data
+    depends_on:
+      ollama:
+        condition: service_healthy
+    networks:
+      - iadoc_network
+
   postgres_application:
     image: postgres:15
     restart: always
@@ -14,6 +69,9 @@ services:
     volumes: 
       - ./database/application_schema_and_data.sql:/docker-entrypoint-initdb.d/application_schema_and_data.sql
       #- pgdata_application:/var/lib/postgresql/data
+    depends_on:
+      ollama:
+        condition: service_healthy
     networks:
       - iadoc_network
     command:
@@ -36,6 +94,9 @@ services:
     volumes: 
       - ./database/document_schema_and_data.sql:/docker-entrypoint-initdb.d/document_schema_and_data.sql
       #- pgdata_document:/var/lib/postgresql/data
+    depends_on:
+      ollama:
+        condition: service_healthy
     networks:
       - iadoc_network
     command:
@@ -58,6 +119,9 @@ services:
     volumes: 
       - ./database/question_schema_and_data.sql:/docker-entrypoint-initdb.d/question_schema_and_data.sql
       #- pgdata_question:/var/lib/postgresql/data
+    depends_on:
+      ollama:
+        condition: service_healthy
     networks:
       - iadoc_network
     command:
@@ -71,6 +135,9 @@ services:
       - '6379:6379'
     expose:
       - 6379
+    depends_on:
+      ollama:
+        condition: service_healthy
     volumes:
       - redis-data:/data
     networks:
@@ -90,6 +157,9 @@ services:
       - 9094:9094
     expose:
       - 9094
+    depends_on:
+      ollama:
+        condition: service_healthy
     networks:
       - iadoc_network
   
@@ -105,6 +175,12 @@ services:
       - 8083:8083
     expose:
       - 8083
+    healthcheck:
+      test: curl -f http://kafka-connect:8083/connectors || exit 1
+      interval: 20s
+      timeout: 50s
+      retries: 10
+      start_period: 10s
     networks:
       - iadoc_network
     environment:
@@ -139,6 +215,38 @@ services:
         #
         sleep infinity
 
+  kafka-add-connectors:
+    container_name: kafka-add-connectors
+    image: curlimages/curl:latest
+    volumes:
+      - ./cdc/:/cdc
+    command:
+      - sh
+      - -c
+      - |
+        curl http://kafka-connect:8083/connectors -H "Content-Type:application/json; charset=utf-8" -d @/cdc/from_application.json &&
+        sleep 1 &&
+        curl http://kafka-connect:8083/connectors -H "Content-Type:application/json; charset=utf-8" -d @/cdc/to_document_documents.json &&
+        sleep 1 &&
+        curl http://kafka-connect:8083/connectors -H "Content-Type:application/json; charset=utf-8" -d @/cdc/from_basic_application.json &&
+        sleep 1 &&
+        curl http://kafka-connect:8083/connectors -H "Content-Type:application/json; charset=utf-8" -d @/cdc/to_question_documents.json &&
+        sleep 1 &&
+        curl http://kafka-connect:8083/connectors -H "Content-Type:application/json; charset=utf-8" -d @/cdc/to_question_questions.json &&
+        sleep 1 &&
+        curl http://kafka-connect:8083/connectors -H "Content-Type:application/json; charset=utf-8" -d @/cdc/from_document_documents.json &&
+        sleep 1 &&
+        curl http://kafka-connect:8083/connectors -H "Content-Type:application/json; charset=utf-8" -d @/cdc/from_question_questions.json &&
+        sleep 1 &&
+        curl http://kafka-connect:8083/connectors -H "Content-Type:application/json; charset=utf-8" -d @/cdc/to_application_documents.json &&
+        sleep 1 &&
+        curl http://kafka-connect:8083/connectors -H "Content-Type:application/json; charset=utf-8" -d @/cdc/to_application_questions.json 
+    depends_on:
+      kafka-connect:
+        condition: service_healthy
+    networks:
+      - iadoc_network
+
   minio:
     image: docker.io/bitnami/minio:latest
     environment:
@@ -149,25 +257,37 @@ services:
       - minio_data:/data
     ports:
       - 9000:9000
-      - 9001:9001
+      - 9001:9001 #REMOVER
     expose:
       - 9001 #REMOVER
+    depends_on:
+      kafka-connect:
+        condition: service_healthy
     networks:
       - iadoc_network
 
   microservice-discovery:
-    image: halissonmartins/microservice-discovery:0.0.1.8-SNAPSHOT
+    image: halissonmartins/microservice-discovery:0.0.1.12-SNAPSHOT
     ports:
       - 8761:8761
     expose:
       - 8761 #REMOVER
     environment:
       TZ: America/Sao_Paulo
+#    healthcheck:
+#      test: curl -f http://microservice-discovery:8761/actuator/info || exit 1
+#      interval: 10s
+#      timeout: 10s
+#      retries: 10
+#      start_period: 10s
+    depends_on:
+      kafka-connect:
+        condition: service_healthy
     networks:
       - iadoc_network
 
   api-gateway:
-    image: halissonmartins/microservice-api-gateway:0.0.1.8-SNAPSHOT
+    image: halissonmartins/microservice-api-gateway:0.0.1.11-SNAPSHOT
     restart: always
     ports:
       - 8500:8500
@@ -175,6 +295,8 @@ services:
       - 8500
     depends_on:
       - microservice-discovery
+#      microservice-discovery:
+#        condition: service_healthy
     environment:
       TZ: America/Sao_Paulo
       EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://microservice-discovery:8761/eureka
@@ -182,15 +304,64 @@ services:
       - iadoc_network
 
   microservice-application:
-    image: halissonmartins/microservice-application:0.0.1.8-SNAPSHOT
+    image: halissonmartins/microservice-application:0.0.1.12-SNAPSHOT
     restart: always
+ #   healthcheck:
+ #     test: curl -f http://api-gateway:8500/app/actuator/info || exit 1
+ #     interval: 10s
+ #     timeout: 10s
+ #     retries: 10
+ #     start_period: 10s
     depends_on:
-      - microservice-discovery
+      - api-gateway
     environment:
       TZ: America/Sao_Paulo
       EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://microservice-discovery:8761/eureka
       SPRING.DATASOURCE.URL: jdbc:postgresql://postgres_application:5432/iadoc_application_db
       UPLOAD_RECEIVED_DIR: /app/documents/received
+      MINIO.ACCESS.KEY: minioadmin
+      MINIO.SECRET.KEY: minioadmin
+      MINIO.URL: http://minio:9000
+      MINIO.BUCKET.NAME: iadoc-bucket
+    networks:
+      - iadoc_network
+
+  microservice-document-processor:
+    image: halissonmartins/microservice-document-processor:0.0.1.12-SNAPSHOT
+    restart: always
+    depends_on:
+      - microservice-application
+#      microservice-application:
+#        condition: service_healthy
+    environment:
+      TZ: America/Sao_Paulo
+      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://microservice-discovery:8761/eureka
+      SPRING.DATASOURCE.URL: jdbc:postgresql://postgres_document:5432/iadoc_document_db #Dentro do docker precisar usar a porta interna
+      SPRING.DATA.REDIS.HOST: redis-stack
+      SPRING.DATA.REDIS.PORT: 6379
+      SPRING.AI.OLLAMA.BASE-URL: http://ollama:11434
+      UPLOAD_RECEIVED_DIR: /app/documents/received
+      MINIO.ACCESS.KEY: minioadmin
+      MINIO.SECRET.KEY: minioadmin
+      MINIO.URL: http://minio:9000
+      MINIO.BUCKET.NAME: iadoc-bucket
+    networks:
+      - iadoc_network
+
+  microservice-question-processor:
+    image: halissonmartins/microservice-question-processor:0.0.1.12-SNAPSHOT
+    restart: always
+    depends_on:
+      - microservice-application
+#      microservice-application:
+#        condition: service_healthy
+    environment:
+      TZ: America/Sao_Paulo
+      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://microservice-discovery:8761/eureka
+      SPRING.DATASOURCE.URL: jdbc:postgresql://postgres_question:5432/iadoc_question_db #Dentro do docker precisar usar a porta interna
+      SPRING.DATA.REDIS.HOST: redis-stack
+      SPRING.DATA.REDIS.PORT: 6379
+      SPRING.AI.OLLAMA.BASE-URL: http://ollama:11434
     networks:
       - iadoc_network
 

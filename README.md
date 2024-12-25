@@ -84,45 +84,36 @@ Os dados para respostas mais precisas são recuperados do VectorDB (REDIS), colo
 # Referências
 
 ## CDC
-https://debezium.io/documentation/reference/stable/
-
-https://developers.redhat.com/articles/2023/07/06/how-use-debezium-smt-groovy-filter-routing-events
-
-https://youtu.be/0_Fm-xr3LY8?si=v2rjM9mDmOb1icrA
-
-https://medium.com/trendyol-tech/debezium-with-simple-message-transformation-smt-4f5a80c85358
+- https://debezium.io/documentation/reference/stable/
+- https://developers.redhat.com/articles/2023/07/06/how-use-debezium-smt-groovy-filter-routing-events
+- https://youtu.be/0_Fm-xr3LY8?si=v2rjM9mDmOb1icrA
+- https://medium.com/trendyol-tech/debezium-with-simple-message-transformation-smt-4f5a80c85358
 
 ## Spring AI e VectorDB
-
-https://youtu.be/4-rG2qsTrAs?si=0LFTj5qkzjGwMFxT
-
-https://youtu.be/ZoPVGrB8iHU?si=zNmMAC6962DvcsMl
-
-https://docs.spring.io/spring-ai/reference/index.html
+- https://youtu.be/4-rG2qsTrAs?si=0LFTj5qkzjGwMFxT
+- https://youtu.be/ZoPVGrB8iHU?si=zNmMAC6962DvcsMl
+- https://docs.spring.io/spring-ai/reference/index.html
 
 
 ## Upload de arquivos
-https://spring.io/guides/gs/uploading-files
-
-https://medium.com/@patelsajal2/how-to-create-a-spring-boot-rest-api-for-multipart-file-uploads-a-comprehensive-guide-b4d95ce3022b
+- https://spring.io/guides/gs/uploading-files
+- https://medium.com/@patelsajal2/how-to-create-a-spring-boot-rest-api-for-multipart-file-uploads-a-comprehensive-guide-b4d95ce3022b
 
 ## Spring Batch
-https://spring.io/guides/gs/batch-processing
+- https://spring.io/guides/gs/batch-processing
+- https://www.toptal.com/spring/spring-batch-tutorial
+- https://medium.com/@rostyslav.ivankiv/introduction-to-spring-batch-a2f39454573f
+- https://tucanoo.com/spring-batch-example-building-a-bulk-contact-importer/
+- https://stackoverflow.com/questions/29286699/repeating-a-step-x-times-in-spring-batch
 
-https://www.toptal.com/spring/spring-batch-tutorial
-
-https://medium.com/@rostyslav.ivankiv/introduction-to-spring-batch-a2f39454573f
-
-https://tucanoo.com/spring-batch-example-building-a-bulk-contact-importer/
-
-https://stackoverflow.com/questions/29286699/repeating-a-step-x-times-in-spring-batch
+## Minio
+- https://gurselgazii.medium.com/integrating-minio-with-spring-boot-a-guide-to-simplified-object-storage-525d5a7686cc
+- https://medium.com/@kapincev/a-developers-guide-to-integrating-minio-with-angular-and-spring-boot-3d77c13aefc7
 
 # TODO
-- Criar um contêiner para servir como File Server e não ser necessário guardar os arquivos em diretórios
-	* https://docs.spring.io/spring-integration/reference/smb.html
-	* https://gurselgazii.medium.com/integrating-minio-with-spring-boot-a-guide-to-simplified-object-storage-525d5a7686cc
-	* https://medium.com/@kapincev/a-developers-guide-to-integrating-minio-with-angular-and-spring-boot-3d77c13aefc7 	
 - Implementar o deploy usando Kubernetes
+- Implementar integração com o Curcube
+- Implementar integração com o SpringFlow
 
 # TODO DESENVOLVIMENTO
 - Escrever os testes unitários
@@ -130,3 +121,4 @@ https://stackoverflow.com/questions/29286699/repeating-a-step-x-times-in-spring-
 - Alterar o arquivo DockerCompose com a versão ao executar profile o plugin do MAVEN
 - Finalizar o README
 - Atualizar a versão do Spring AI
+- Configura o ChatService corretamente devido a atualização

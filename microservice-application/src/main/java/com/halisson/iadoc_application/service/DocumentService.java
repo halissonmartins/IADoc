@@ -15,7 +15,8 @@ import com.halisson.iadoc_application.entity.Document;
 import com.halisson.iadoc_application.excection.AlreadyExistsException;
 import com.halisson.iadoc_application.excection.NotFoundException;
 import com.halisson.iadoc_application.repository.DocumentRepository;
-import com.halisson.iadoc_application.storage.StorageService;
+import com.halisson.iadoc_application.storage.FileSystemStorageService;
+import com.halisson.iadoc_application.storage.MinioStorageService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,7 +26,8 @@ import lombok.extern.slf4j.Slf4j;
 @AllArgsConstructor
 public class DocumentService {
 
-	private final StorageService storageService;
+	private final MinioStorageService storageService;
+	//private final FileSystemStorageService storageService;
 	private final DocumentRepository documentRepository;
 	
 	@Transactional

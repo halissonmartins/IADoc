@@ -40,7 +40,7 @@ public class ChatService extends AbstractChatService{
 		promptParameters.put("input", message);
 		
 		String documents = String.join("\n", findSimilarDocuments(message));
-		log.info("Documentos:", documents);
+		log.info("Documentos:\n {}", documents);
 		promptParameters.put("documents", documents);
 		
 		return prompt(promptTemplate, promptParameters);

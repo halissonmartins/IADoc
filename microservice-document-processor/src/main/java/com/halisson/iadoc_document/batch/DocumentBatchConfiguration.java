@@ -29,6 +29,7 @@ import com.halisson.iadoc_document.repository.DocumentRepository;
 import com.halisson.iadoc_library.enums.EnumDocumentStatus;
 import com.halisson.iadoc_library.enums.StepBatchStatus;
 
+import io.minio.MinioClient;
 import jakarta.annotation.PreDestroy;
 import lombok.extern.slf4j.Slf4j;
 
@@ -42,7 +43,7 @@ public class DocumentBatchConfiguration {
 	private final VectorStore vectorStore;
 	private final PdfDocumentReaderConfig pdfConfig;
 	private final String receivedDir;
-	private final String processedDir;
+	private final MinioClient minioClient;
 
 	public DocumentBatchConfiguration(
 			JobExplorer jobs, 
@@ -50,13 +51,13 @@ public class DocumentBatchConfiguration {
 			PdfDocumentReaderConfig pdfConfig,
 			DocumentRepository documentRepository,
 			@Value("${UPLOAD_RECEIVED_DIR}") String receivedDir, 
-			@Value("${PROCESSED_DIR}") String processedDir) {
+			MinioClient minioClient) {
 		super();
 		this.jobs = jobs;
 		this.vectorStore = vectorStore;
 		this.pdfConfig = pdfConfig;
 		this.receivedDir = receivedDir;
-		this.processedDir = processedDir;
+		this.minioClient = minioClient;
 	}
 
 	@Bean
@@ -98,7 +99,7 @@ public class DocumentBatchConfiguration {
 	
 	@Bean
 	DocumentItemProcessor processorDocument() {
-		return new DocumentItemProcessor(vectorStore, pdfConfig, receivedDir, processedDir);
+		return new DocumentItemProcessor(vectorStore, pdfConfig, receivedDir, minioClient);
 	}
 	
 	@Bean
