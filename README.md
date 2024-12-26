@@ -112,12 +112,11 @@ Os dados para respostas mais precisas são recuperados do VectorDB (REDIS), colo
 
 # TODO
 - Implementar o deploy usando Kubernetes
-- Implementar integração com o Curcube
+- Implementar integração com o Cucumber
 - Implementar integração com o SpringFlow
 
 # TODO DESENVOLVIMENTO
 - Escrever os testes unitários
-- Ter campo resposta com BLOB
 - Alterar o arquivo DockerCompose com a versão ao executar profile o plugin do MAVEN
 - Finalizar o README
 - Atualizar a versão do Spring AI

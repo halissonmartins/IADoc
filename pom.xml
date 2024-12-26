@@ -15,7 +15,7 @@
 	<name>ia-documents</name>
 	<description>Projeto consiste em 3 microsserviços principais: Aplicação (upload de documentos e cadastro de perguntas), Documentos (processamento dos documentos) e Perguntas (processamento das perguntas)</description>
 	<properties>
-		<iadoc.version>0.0.1.12-SNAPSHOT</iadoc.version>
+		<iadoc.version>0.0.1.13-SNAPSHOT</iadoc.version>
 		<java.version>21</java.version>
 		<spring.version>3.3.6</spring.version>
 		<spring-ai.version>1.0.0-M4</spring-ai.version>

@@ -36,6 +36,7 @@ public class Question implements Serializable {
 	@Column(nullable = false)
 	private String question;
 	
+	@Column(columnDefinition="TEXT")
 	private String response;
 	
 	@ManyToOne

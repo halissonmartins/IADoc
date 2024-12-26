@@ -28,7 +28,7 @@ CREATE TABLE application.question_status (
 CREATE TABLE application.questions (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     question VARCHAR(400) NOT NULL,
-	response VARCHAR(4000),
+	response TEXT,
 	question_status_code INT NOT NULL,
 	document_id BIGINT,
 	created_at TIMESTAMP NOT NULL,

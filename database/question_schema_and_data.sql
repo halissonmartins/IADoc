@@ -25,7 +25,7 @@ CREATE TABLE question.question_status (
 CREATE TABLE question.questions (
     id BIGINT PRIMARY KEY,
     question VARCHAR(400) NOT NULL,
-	response VARCHAR(4000),
+	response TEXT,
 	question_status_code INT NOT NULL,
 	document_id BIGINT,
 	created_at TIMESTAMP NOT NULL,

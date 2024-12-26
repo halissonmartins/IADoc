@@ -267,7 +267,7 @@ services:
       - iadoc_network
 
   microservice-discovery:
-    image: halissonmartins/microservice-discovery:0.0.1.12-SNAPSHOT
+    image: halissonmartins/microservice-discovery:0.0.1.13-SNAPSHOT
     ports:
       - 8761:8761
     expose:
@@ -287,7 +287,7 @@ services:
       - iadoc_network
 
   api-gateway:
-    image: halissonmartins/microservice-api-gateway:0.0.1.11-SNAPSHOT
+    image: halissonmartins/microservice-api-gateway:0.0.1.13-SNAPSHOT
     restart: always
     ports:
       - 8500:8500
@@ -304,7 +304,7 @@ services:
       - iadoc_network
 
   microservice-application:
-    image: halissonmartins/microservice-application:0.0.1.12-SNAPSHOT
+    image: halissonmartins/microservice-application:0.0.1.13-SNAPSHOT
     restart: always
  #   healthcheck:
  #     test: curl -f http://api-gateway:8500/app/actuator/info || exit 1
@@ -327,7 +327,7 @@ services:
       - iadoc_network
 
   microservice-document-processor:
-    image: halissonmartins/microservice-document-processor:0.0.1.12-SNAPSHOT
+    image: halissonmartins/microservice-document-processor:0.0.1.13-SNAPSHOT
     restart: always
     depends_on:
       - microservice-application
@@ -349,7 +349,7 @@ services:
       - iadoc_network
 
   microservice-question-processor:
-    image: halissonmartins/microservice-question-processor:0.0.1.12-SNAPSHOT
+    image: halissonmartins/microservice-question-processor:0.0.1.13-SNAPSHOT
     restart: always
     depends_on:
       - microservice-application
