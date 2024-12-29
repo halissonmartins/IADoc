@@ -1,4 +1,3 @@
-QUESTÃO:
 {input}
 
 DOCUMENTOS:

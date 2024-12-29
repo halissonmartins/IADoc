@@ -110,6 +110,9 @@ Os dados para respostas mais precisas são recuperados do VectorDB (REDIS), colo
 - https://gurselgazii.medium.com/integrating-minio-with-spring-boot-a-guide-to-simplified-object-storage-525d5a7686cc
 - https://medium.com/@kapincev/a-developers-guide-to-integrating-minio-with-angular-and-spring-boot-3d77c13aefc7
 
+## Condition Qualifier
+- https://codingnconcepts.com/spring-boot/conditional-annotations-in-spring-boot/
+
 # TODO
 - Implementar o deploy usando Kubernetes
 - Implementar integração com o Cucumber
@@ -120,4 +123,5 @@ Os dados para respostas mais precisas são recuperados do VectorDB (REDIS), colo
 - Alterar o arquivo DockerCompose com a versão ao executar profile o plugin do MAVEN
 - Finalizar o README
 - Atualizar a versão do Spring AI
-- Configura o ChatService corretamente devido a atualização
+- Mapear o diretório de arquivos recebidos no container e criar um condição baseada em variável de ambiente no Bean para gravar no diretório ou Minio.
+- No ambiente docker apresentar corretamente a URL do hateoas considerando o API Gateway.

@@ -2,8 +2,6 @@ package com.halisson.iadoc_application.storage;
 
 import java.io.InputStream;
 import java.util.Arrays;
-import java.util.Date;
-import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -14,10 +12,10 @@ import io.minio.PutObjectArgs;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-@Service
+@Service("minioStorageService")
 @RequiredArgsConstructor
 @Slf4j
-public class MinioStorageService implements StorageService {
+public class MinioStorageService implements IStorageService {
 	
 	private final MinioClient minioClient;
 

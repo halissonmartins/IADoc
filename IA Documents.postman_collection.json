@@ -13,7 +13,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"question\": \"Sua pergunta aqui?\",\r\n    \"documentId\": 1\r\n}",
+					"raw": "{\r\n    \"question\": \"Onde Garcia se encontrou com Fortunato pela primeira vez?\",\r\n    \"documentId\": 1\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -21,13 +21,14 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8501/questions",
+					"raw": "http://localhost:8500/app/questions",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8501",
+					"port": "8500",
 					"path": [
+						"app",
 						"questions"
 					]
 				}
@@ -41,7 +42,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"question\": \"Como instalar uma memória RAM em um notebook Dell?\"\r\n}",
+					"raw": "{\r\n    \"question\": \"Escreva um livro sobre spring boot com 4000 palavras\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -49,13 +50,14 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8501/questions",
+					"raw": "http://localhost:8500/app/questions",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8501",
+					"port": "8500",
 					"path": [
+						"app",
 						"questions"
 					]
 				}
@@ -68,13 +70,14 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8501/questions",
+					"raw": "http://localhost:8500/app/questions",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8501",
+					"port": "8500",
 					"path": [
+						"app",
 						"questions"
 					]
 				}
@@ -87,13 +90,14 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8501/documents",
+					"raw": "http://localhost:8500/app/documents",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8501",
+					"port": "8500",
 					"path": [
+						"app",
 						"documents"
 					]
 				}
@@ -106,15 +110,16 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8501/questions/1",
+					"raw": "http://localhost:8500/app/questions/3",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8501",
+					"port": "8500",
 					"path": [
+						"app",
 						"questions",
-						"1"
+						"3"
 					]
 				}
 			},
@@ -126,15 +131,16 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8501/documents/1",
+					"raw": "http://localhost:8500/app/documents/3",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8501",
+					"port": "8500",
 					"path": [
+						"app",
 						"documents",
-						"1"
+						"3"
 					]
 				}
 			},
@@ -151,18 +157,19 @@
 						{
 							"key": "files",
 							"type": "file",
-							"src": []
+							"src": "/C:/Users/halis/Downloads/ua000182.pdf"
 						}
 					]
 				},
 				"url": {
-					"raw": "http://localhost:8501/upload",
+					"raw": "http://localhost:8500/app/upload",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8501",
+					"port": "8500",
 					"path": [
+						"app",
 						"upload"
 					]
 				}

@@ -267,7 +267,7 @@ services:
       - iadoc_network
 
   microservice-discovery:
-    image: halissonmartins/microservice-discovery:0.0.1.13-SNAPSHOT
+    image: halissonmartins/microservice-discovery:0.0.1.14-SNAPSHOT
     ports:
       - 8761:8761
     expose:
@@ -287,7 +287,7 @@ services:
       - iadoc_network
 
   api-gateway:
-    image: halissonmartins/microservice-api-gateway:0.0.1.13-SNAPSHOT
+    image: halissonmartins/microservice-api-gateway:0.0.1.14-SNAPSHOT
     restart: always
     ports:
       - 8500:8500
@@ -304,35 +304,29 @@ services:
       - iadoc_network
 
   microservice-application:
-    image: halissonmartins/microservice-application:0.0.1.13-SNAPSHOT
+    image: halissonmartins/microservice-application:0.0.1.14-SNAPSHOT
     restart: always
- #   healthcheck:
- #     test: curl -f http://api-gateway:8500/app/actuator/info || exit 1
- #     interval: 10s
- #     timeout: 10s
- #     retries: 10
- #     start_period: 10s
     depends_on:
       - api-gateway
     environment:
       TZ: America/Sao_Paulo
       EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://microservice-discovery:8761/eureka
-      SPRING.DATASOURCE.URL: jdbc:postgresql://postgres_application:5432/iadoc_application_db
+      SPRING.DATASOURCE.URL: jdbc:postgresql://postgres_application:5432/iadoc_application_db #Dentro do docker precisar usar a porta interna
       UPLOAD_RECEIVED_DIR: /app/documents/received
       MINIO.ACCESS.KEY: minioadmin
       MINIO.SECRET.KEY: minioadmin
       MINIO.URL: http://minio:9000
       MINIO.BUCKET.NAME: iadoc-bucket
+    volumes:
+      - ./data/documents/received:/app/documents/received
     networks:
       - iadoc_network
 
   microservice-document-processor:
-    image: halissonmartins/microservice-document-processor:0.0.1.13-SNAPSHOT
+    image: halissonmartins/microservice-document-processor:0.0.1.14-SNAPSHOT
     restart: always
     depends_on:
       - microservice-application
-#      microservice-application:
-#        condition: service_healthy
     environment:
       TZ: America/Sao_Paulo
       EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://microservice-discovery:8761/eureka
@@ -345,16 +339,16 @@ services:
       MINIO.SECRET.KEY: minioadmin
       MINIO.URL: http://minio:9000
       MINIO.BUCKET.NAME: iadoc-bucket
+    volumes:
+      - ./data/documents/received:/app/documents/received
     networks:
       - iadoc_network
 
   microservice-question-processor:
-    image: halissonmartins/microservice-question-processor:0.0.1.13-SNAPSHOT
+    image: halissonmartins/microservice-question-processor:0.0.1.14-SNAPSHOT
     restart: always
     depends_on:
       - microservice-application
-#      microservice-application:
-#        condition: service_healthy
     environment:
       TZ: America/Sao_Paulo
       EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://microservice-discovery:8761/eureka

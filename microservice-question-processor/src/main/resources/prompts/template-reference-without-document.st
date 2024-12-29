@@ -1,2 +1,1 @@
-QUESTÃO:
 {input}

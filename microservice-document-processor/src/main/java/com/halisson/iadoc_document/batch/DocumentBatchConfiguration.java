@@ -18,7 +18,6 @@ import org.springframework.batch.item.data.RepositoryItemWriter;
 import org.springframework.batch.item.data.builder.RepositoryItemReaderBuilder;
 import org.springframework.batch.item.data.builder.RepositoryItemWriterBuilder;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.Sort.Direction;
@@ -26,10 +25,10 @@ import org.springframework.transaction.PlatformTransactionManager;
 
 import com.halisson.iadoc_document.entity.Document;
 import com.halisson.iadoc_document.repository.DocumentRepository;
+import com.halisson.iadoc_document.storage.IStorageService;
 import com.halisson.iadoc_library.enums.EnumDocumentStatus;
 import com.halisson.iadoc_library.enums.StepBatchStatus;
 
-import io.minio.MinioClient;
 import jakarta.annotation.PreDestroy;
 import lombok.extern.slf4j.Slf4j;
 
@@ -42,22 +41,19 @@ public class DocumentBatchConfiguration {
 	private final JobExplorer jobs;
 	private final VectorStore vectorStore;
 	private final PdfDocumentReaderConfig pdfConfig;
-	private final String receivedDir;
-	private final MinioClient minioClient;
+	private final IStorageService storageService;	
 
 	public DocumentBatchConfiguration(
 			JobExplorer jobs, 
 			VectorStore vectorStore, 
 			PdfDocumentReaderConfig pdfConfig,
-			DocumentRepository documentRepository,
-			@Value("${UPLOAD_RECEIVED_DIR}") String receivedDir, 
-			MinioClient minioClient) {
+			@Qualifier("minioStorageService") IStorageService storageService) {
+		
 		super();
 		this.jobs = jobs;
 		this.vectorStore = vectorStore;
 		this.pdfConfig = pdfConfig;
-		this.receivedDir = receivedDir;
-		this.minioClient = minioClient;
+		this.storageService = storageService;
 	}
 
 	@Bean
@@ -99,7 +95,7 @@ public class DocumentBatchConfiguration {
 	
 	@Bean
 	DocumentItemProcessor processorDocument() {
-		return new DocumentItemProcessor(vectorStore, pdfConfig, receivedDir, minioClient);
+		return new DocumentItemProcessor(vectorStore, pdfConfig, storageService);
 	}
 	
 	@Bean
@@ -119,7 +115,6 @@ public class DocumentBatchConfiguration {
 			@Qualifier("processorStep") Step step2, 
 			JobCompletionNotificationListener listener) {
 		return new JobBuilder(JOB_NAME, jobRepository)
-				//.listener(new DocumentJobExecutionListener(jobs))
 				.start(step1).on(StepBatchStatus.CONTINUE.name()).to(step2)
 				.from(step1).on(StepBatchStatus.FINISHED.name()).end()
 				.next(step2)

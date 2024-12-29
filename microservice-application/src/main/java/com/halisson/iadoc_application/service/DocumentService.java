@@ -2,6 +2,7 @@ package com.halisson.iadoc_application.service;
 
 import java.util.Arrays;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -15,21 +16,26 @@ import com.halisson.iadoc_application.entity.Document;
 import com.halisson.iadoc_application.excection.AlreadyExistsException;
 import com.halisson.iadoc_application.excection.NotFoundException;
 import com.halisson.iadoc_application.repository.DocumentRepository;
-import com.halisson.iadoc_application.storage.FileSystemStorageService;
-import com.halisson.iadoc_application.storage.MinioStorageService;
+import com.halisson.iadoc_application.storage.IStorageService;
 
-import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
-@AllArgsConstructor
 public class DocumentService {
 
-	private final MinioStorageService storageService;
-	//private final FileSystemStorageService storageService;
-	private final DocumentRepository documentRepository;
+	private final IStorageService storageService;
 	
+	private final DocumentRepository documentRepository;
+		
+	public DocumentService(
+			@Qualifier("minioStorageService") IStorageService storageService, 
+			DocumentRepository documentRepository) {
+		super();
+		this.storageService = storageService;
+		this.documentRepository = documentRepository;
+	}
+
 	@Transactional
 	public void saveAndStore(MultipartFile file) {
 		save(file);

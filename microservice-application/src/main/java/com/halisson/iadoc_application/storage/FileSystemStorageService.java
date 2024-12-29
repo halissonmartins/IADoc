@@ -12,8 +12,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.halisson.iadoc_application.excection.StorageException;
 
-@Service
-public class FileSystemStorageService implements StorageService {
+@Service("fileSystemStorageService")
+public class FileSystemStorageService implements IStorageService {
 
 	private final Path rootReceivedDir;
 
