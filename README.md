@@ -8,6 +8,21 @@ No microserviço de documentos foi criado um JOB com Spring Batch para fazer a g
 No microserviço de perguntas foi criado outro JOB com Spring Batch para responder às perguntas cadastradas. 
 Os dados para respostas mais precisas são recuperados do VectorDB (REDIS), colocados em template e o Spring AI realiza o chat com o modelo Llama3 para obter as respostas.
 
+# Ferramentas e frameworks utilizados
+- Ollama
+- Llama3
+- Kafka
+- Confluent Kafka Connect
+- Debezium
+- Postgres SQL
+- Redis
+- Minio
+- Docker
+- Spring Boot
+- Spring Cloud
+- Spring AI
+- Spring Batch
+
 # Fluxo de dados entre as bases com o CDC
 ![Alt text](/asserts/images/FluxoDadosCDC.jpg?raw=true "Diagrama representando o fluxo dos dados entre as bases")
 
