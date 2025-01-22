@@ -62,7 +62,7 @@ Os dados para respostas mais precisas são recuperados do VectorDB (REDIS), colo
 	docker-compose -f docker-compose.yml down
 	```
 
-# Passos para realizar utilizar os endpoints
+# Instruções para utilizar os endpoints
 - Fazer o upload de um documento PDF:
 	```sh
 	curl --location 'http://localhost:8501/upload' --form 'files=@"/algumArquivoPdf.pdf"'
