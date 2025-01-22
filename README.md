@@ -1,4 +1,4 @@
-# IADoc - Projeto de microsserviços com upload de documentos, processamento de perguntas e uso de Kafka, CDC, Spring Batch, Spring Boot, Minio, Spring AI, RAG e Llama3 para otimização e respostas precisas.
+# IADoc - Projeto de microsserviços com upload de documentos, processamento de perguntas e uso de Kafka, CDC, Spring Batch, Spring Boot, Minio, Spring AI, RAG e Llama3 para respostas precisas.
 Projeto consiste em 3 microsserviços principais: Aplicação (upload de documentos e cadastro de perguntas), Documentos (processamento dos documentos) e Perguntas (processamento das perguntas).
 
 O microserviço de aplicação é responsável por fazer o upload de documentos PDF e o cadastro de perguntas sobre os respectivos através de API REST.
