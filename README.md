@@ -13,48 +13,56 @@ Os dados para respostas mais precisas são recuperados do VectorDB (REDIS), colo
 
 # Programas que precisam ser instalados e iniciados previamente
 - Docker Desktop
-- Ollama
+- JAVA 21
+- MAVEN
 
 # Antes de iniciar a execução
-- Crie dois diretórios diferentes (ex: /recebidos e /processados) em uma pasta temporária.
+- Criar a variável de ambiente UPLOAD_RECEIVED_DIR, contendo o diretório relativo seu PC para recepção(/recebidos) dos arquivos.
 	```sh
-	mkdir \tmp\recebidos
- 	mkdir \tmp\processados
+	set UPLOAD_RECEIVED_DIR=D:\SeuDiretorio\IADoc\data\documents\received\
 	```
 
-- Criar as variáveis de ambiente UPLOAD_RECEIVED_DIR e PROCESSED_DIR, com os diretórios para recepção(/recebidos) e guarda(/processados) dos arquivos processados.
+- No arquivo pom.xml na raiz do projeto alterar a propriedade user.docker.hub colocando seu usuário no DockerHub.
+- No arquivo docker-compose.yml na raiz do projeto alterar o caminho das imagens dos microserviços colocando seu usuário no DockerHub.
+
+# Passos para execução via IDE
+- No terminal execute o seguinte comando:
 	```sh
-	set UPLOAD_RECEIVED_DIR=C:\tmp\recebidos\
- 	set PROCESSED_DIR=C:\tmp\processados\
-	```
-- Faça o download do modelo llama3
-	```sh
-	ollama pull llama3
+	docker-compose -f docker-compose-infra.yml up -d
 	```
 
-# Passos para execução
-- No terminal execute o seguinte comando: docker compose up -d
-- Aguarde um momento para o kafka-connect inicializar completamente
-- No terminal acesse a pasta do projeto e execute os seguintes comandos para adicionar os conectores do postgres no container do kafka-connect:
+- Iniciar o microserviço microservice-discovery.
+- Iniciar o microserviço microservice-api-gateway.
+- Iniciar o microserviço microservice-application.
+- Iniciar o microserviço microservice-document-processor.
+- Iniciar o microserviço microservice-question-processor.
+- No terminal execute o comando para finalizar todos os containers. 
 	```sh
-	curl -X POST  -H  "Content-Type:application/json" http://localhost:8083/connectors -d @./cdc/from_application.json
-	
-	curl -X POST  -H  "Content-Type:application/json" http://localhost:8083/connectors -d @./cdc/from_basic_application.json
-	
-	curl -X POST  -H  "Content-Type:application/json" http://localhost:8083/connectors -d @./cdc/from_document_documents.json
-	
-	curl -X POST  -H  "Content-Type:application/json" http://localhost:8083/connectors -d @./cdc/from_question_questions.json
-	
-	curl -X POST  -H  "Content-Type:application/json" http://localhost:8083/connectors -d @./cdc/to_document_documents.json
-	
-	curl -X POST  -H  "Content-Type:application/json" http://localhost:8083/connectors -d @./cdc/to_question_documents.json
-	
-	curl -X POST  -H  "Content-Type:application/json" http://localhost:8083/connectors -d @./cdc/to_question_questions.json
+	docker-compose -f docker-compose-infra.yml down
 	```
 
-- Iniciar o microserviço de aplicação
-- Iniciar o microserviço de documentos
-- Iniciar o microserviço de perguntas
+# Passos para execução de todos os containers via Docker
+- Na raiz do projeto execute o comando para gerar os executáveis(JAR) dos microserviços:
+	```sh
+	mvn clean install
+	```
+- Na raiz do projeto execute o comando para gerar as imagens dos microserviços:
+	```sh
+	mvn spring-boot:build-image
+	```
+
+- No terminal execute o seguinte comando:
+	```sh
+	docker-compose -f docker-compose.yml up -d
+	```
+
+- Aguardar todos os containers inicializarem.
+- No terminal execute o comando para finalizar todos os containers. 
+	```sh
+	docker-compose -f docker-compose.yml down
+	```
+
+# Passos para realizar utilizar os endpoints
 - Fazer o upload de um documento PDF:
 	```sh
 	curl --location 'http://localhost:8501/upload' --form 'files=@"/algumArquivoPdf.pdf"'
@@ -74,8 +82,6 @@ Os dados para respostas mais precisas são recuperados do VectorDB (REDIS), colo
 	```sh
 	curl --location 'http://localhost:8501/questions/1'
 	```
-
-- No terminal execute o comando para finalizar todos os containers: docker-compose down
 
 > Nota: Dentro do projeto tem a coleção com todas as requisições REST para importar no Postman ou Insomia.
 
@@ -114,14 +120,14 @@ Os dados para respostas mais precisas são recuperados do VectorDB (REDIS), colo
 - https://codingnconcepts.com/spring-boot/conditional-annotations-in-spring-boot/
 
 # TODO
+- Criar as tabelas nescessárias para o SpringBatch diretamente via script.
 - Implementar o deploy usando Kubernetes
 - Implementar integração com o Cucumber
 - Implementar integração com o SpringFlow
 
 # TODO DESENVOLVIMENTO
 - Escrever os testes unitários
-- Alterar o arquivo DockerCompose com a versão ao executar profile o plugin do MAVEN
-- Finalizar o README
+- Alterar o arquivo DockerCompose através de um template com a versão ao executar o MAVEN
 - Atualizar a versão do Spring AI
-- Mapear o diretório de arquivos recebidos no container e criar um condição baseada em variável de ambiente no Bean para gravar no diretório ou Minio.
+- Criar uma condição baseada em variável de ambiente no Bean para gravar no diretório ou Minio.
 - No ambiente docker apresentar corretamente a URL do hateoas considerando o API Gateway.

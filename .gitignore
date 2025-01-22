@@ -30,4 +30,5 @@ replay_pid*
 /.classpath
 /.factorypath
 /.project
-/data/*
+# /data/ollama/*
+# /data/open-webui/*

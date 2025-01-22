@@ -86,7 +86,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
 					<image>
-						<name>halissonmartins/${project.artifactId}:${project.version}</name>
+						<name>${user.docker.hub}/${project.artifactId}:${project.version}</name>
 						<env>
 							<BP_JVM_VERSION>${java.version}</BP_JVM_VERSION>
 			            </env>
