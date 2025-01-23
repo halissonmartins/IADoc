@@ -46,11 +46,14 @@ Os dados para respostas mais precisas são recuperados do VectorDB (REDIS), colo
 	docker-compose -f docker-compose-infra.yml up -d
 	```
 
-- Iniciar o microserviço microservice-discovery.
-- Iniciar o microserviço microservice-api-gateway.
-- Iniciar o microserviço microservice-application.
-- Iniciar o microserviço microservice-document-processor.
-- Iniciar o microserviço microservice-question-processor.
+- Aguarde 2 minutos para que todos os containers com infra sejam completamente inicializados.
+- Iniciar os microserviços exatamente nessa sequência aguardando a inicialização completa antes de incializar o seguinte:
+	1. Microserviço microservice-discovery.
+	2. Microserviço microservice-api-gateway.
+	3. Microserviço microservice-application.
+	4. Microserviço microservice-document-processor.
+	5. Microserviço microservice-question-processor.
+	
 - No terminal execute o comando para finalizar todos os containers. 
 	```sh
 	docker-compose -f docker-compose-infra.yml down
@@ -61,6 +64,7 @@ Os dados para respostas mais precisas são recuperados do VectorDB (REDIS), colo
 	```sh
 	mvn clean install
 	```
+
 - Na raiz do projeto execute o comando para gerar as imagens dos microserviços:
 	```sh
 	mvn spring-boot:build-image
@@ -135,7 +139,7 @@ Os dados para respostas mais precisas são recuperados do VectorDB (REDIS), colo
 - https://codingnconcepts.com/spring-boot/conditional-annotations-in-spring-boot/
 
 ## TODO
-- Criar as tabelas nescessárias para o SpringBatch diretamente via script.
+- Criar as tabelas nescessárias para o SpringBatch diretamente via DDL no container do Postgres.
 - Implementar o deploy usando Kubernetes
 - Implementar integração com o Cucumber
 - Implementar integração com o SpringFlow
