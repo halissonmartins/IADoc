@@ -46,6 +46,7 @@ Os dados para respostas mais precisas são recuperados do VectorDB (REDIS), colo
 	docker-compose -f docker-compose-infra.yml up -d
 	```
 
+- Se for a primeira vez que executa o projeto, aguarde o container do Ollama finalizar o pull do modelo Llama3.
 - Aguarde 2 minutos para que todos os containers com infra sejam completamente inicializados.
 - Iniciar os microserviços exatamente nessa sequência aguardando a inicialização completa antes de incializar o seguinte:
 	1. Microserviço microservice-discovery.
@@ -145,6 +146,7 @@ Os dados para respostas mais precisas são recuperados do VectorDB (REDIS), colo
 - Implementar integração com o SpringFlow
 
 ## TODO DESENVOLVIMENTO
+- Documentar o código
 - Escrever os testes unitários
 - Alterar o arquivo DockerCompose através de um template com a versão ao executar o MAVEN
 - Atualizar a versão do Spring AI
