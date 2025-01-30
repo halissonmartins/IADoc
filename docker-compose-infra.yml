@@ -33,7 +33,23 @@ services:
     container_name: ollama-models-pull
     image: curlimages/curl:latest
     command: >
-      http://ollama:11434/api/pull -d '{"name":"llama3"}'
+      http://ollama:11434/api/pull -d '{"name":"deepseek-r1:8b"}'
+    depends_on:
+      ollama:
+        condition: service_healthy
+    networks:
+      - iadoc_network
+
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:main
+    ports:
+      - "3000:8080"
+    expose:
+      - 3000
+    environment:
+      - OLLAMA_BASE_URL=http://ollama:11434
+    volumes:
+      - ./data/open-webui:/app/backend/data
     depends_on:
       ollama:
         condition: service_healthy

@@ -33,7 +33,7 @@ services:
     container_name: ollama-models-pull
     image: curlimages/curl:latest
     command: >
-      http://ollama:11434/api/pull -d '{"name":"llama3"}'
+      http://ollama:11434/api/pull -d '{"name":"deepseek-r1:8b"}'
     depends_on:
       ollama:
         condition: service_healthy
@@ -253,7 +253,7 @@ services:
       - iadoc_network
 
   microservice-discovery:
-    image: halissonmartins/microservice-discovery:0.0.1.16-SNAPSHOT #Aqui utilize o seu usuário no DockerHub
+    image: halissonmartins/microservice-discovery:0.0.1.17-SNAPSHOT #Aqui utilize o seu usuário no DockerHub
     ports:
       - 8761:8761
     expose:
@@ -273,7 +273,7 @@ services:
       - iadoc_network
 
   api-gateway:
-    image: halissonmartins/microservice-api-gateway:0.0.1.16-SNAPSHOT #Aqui utilize o seu usuário no DockerHub
+    image: halissonmartins/microservice-api-gateway:0.0.1.17-SNAPSHOT #Aqui utilize o seu usuário no DockerHub
     restart: always
     ports:
       - 8500:8500
@@ -290,7 +290,7 @@ services:
       - iadoc_network
 
   microservice-application:
-    image: halissonmartins/microservice-application:0.0.1.16-SNAPSHOT #Aqui utilize o seu usuário no DockerHub
+    image: halissonmartins/microservice-application:0.0.1.17-SNAPSHOT #Aqui utilize o seu usuário no DockerHub
     restart: always
     depends_on:
       - api-gateway
@@ -309,7 +309,7 @@ services:
       - iadoc_network
 
   microservice-document-processor:
-    image: halissonmartins/microservice-document-processor:0.0.1.16-SNAPSHOT #Aqui utilize o seu usuário no DockerHub
+    image: halissonmartins/microservice-document-processor:0.0.1.17-SNAPSHOT #Aqui utilize o seu usuário no DockerHub
     restart: always
     depends_on:
       - microservice-application
@@ -331,7 +331,7 @@ services:
       - iadoc_network
 
   microservice-question-processor:
-    image: halissonmartins/microservice-question-processor:0.0.1.16-SNAPSHOT #Aqui utilize o seu usuário no DockerHub
+    image: halissonmartins/microservice-question-processor:0.0.1.17-SNAPSHOT #Aqui utilize o seu usuário no DockerHub
     restart: always
     depends_on:
       - microservice-application

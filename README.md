@@ -1,4 +1,4 @@
-# IADoc - Projeto de microsserviços com upload de documentos, processamento de perguntas com RAG dos documentos e uso de Kafka, Debezium, CDC, Spring Batch, Spring Boot, Minio, Spring AI, Ollama e Llama3 para respostas precisas.
+# IADoc - Projeto de microsserviços com upload de documentos, processamento de perguntas com RAG dos documentos e uso de Kafka, Debezium, CDC, Spring Batch, Spring Boot, Minio, Spring AI, Ollama e Deepseek-r1 para respostas precisas.
 Projeto consiste em 3 microsserviços principais: Aplicação (upload de documentos e cadastro de perguntas), Documentos (processamento dos documentos) e Perguntas (processamento das perguntas).
 
 O microserviço de aplicação é responsável por fazer o upload de documentos PDF e o cadastro de perguntas sobre os respectivos através de API REST.
@@ -6,11 +6,11 @@ Para fazer a replicação dos dados para os microsserviços de documentos e perg
 Para racionalizar o uso da GPU os documentos e perguntas não são processados em tempo real. Eles são armazenados e replicados para os respectivos microsserviços.
 No microserviço de documentos foi criado um JOB com Spring Batch para fazer a geração argumentada de recuperação (Retrieval-Augmented Generation, RAG) nos documentos e REDIS no armazenamento em forma de vetor.
 No microserviço de perguntas foi criado outro JOB com Spring Batch para responder às perguntas cadastradas. 
-Os dados para respostas mais precisas são recuperados do VectorDB (REDIS), colocados em template e o Spring AI realiza o chat com o modelo Llama3 para obter as respostas.
+Os dados para respostas mais precisas são recuperados do VectorDB (REDIS), colocados em template e o Spring AI realiza o chat com o modelo Deepseek-r1 para obter as respostas.
 
 ## Ferramentas e frameworks utilizados
 - Ollama
-- Llama3
+- Deepseek-r1
 - Kafka
 - Confluent Kafka Connect
 - Debezium
@@ -46,7 +46,7 @@ Os dados para respostas mais precisas são recuperados do VectorDB (REDIS), colo
 	docker-compose -f docker-compose-infra.yml up -d
 	```
 
-- Se for a primeira vez que executa o projeto, aguarde o container do Ollama finalizar o pull do modelo Llama3.
+- Se for a primeira vez que executa o projeto, aguarde o container do Ollama finalizar o pull do modelo Deepseek-r1.
 - Aguarde 2 minutos para que todos os containers com infra sejam completamente inicializados.
 - Iniciar os microserviços exatamente nessa sequência aguardando a inicialização completa antes de incializar o seguinte:
 	1. Microserviço microservice-discovery.
