@@ -31,7 +31,7 @@ Os dados para respostas mais precisas são recuperados do VectorDB (REDIS), colo
 
 ## Programas que precisam ser instalados e iniciados previamente
 - Docker Desktop
-- JAVA 21
+- JAVA 25
 - MAVEN
 
 ## Antes de iniciar a execução
