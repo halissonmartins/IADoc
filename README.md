@@ -152,6 +152,5 @@ Os dados para respostas mais precisas são recuperados do VectorDB (REDIS), colo
 - Documentar o código
 - Escrever os testes unitários
 - Alterar o arquivo DockerCompose através de um template com a versão ao executar o MAVEN
-- Atualizar a versão do Spring AI
 - Criar uma condição baseada em variável de ambiente no Bean para gravar no diretório ou Minio.
 - No ambiente docker apresentar corretamente a URL do hateoas considerando o API Gateway.
