@@ -60,7 +60,7 @@ Os dados para respostas mais precisas são recuperados do VectorDB (REDIS), colo
 	
 - No terminal execute o comando para finalizar todos os containers. 
 	```sh
-	docker-compose -f docker-compose-infra.yml down
+	docker-compose -f docker-compose-infra.yml down --volumes
 	```
 
 ## Passos para execução de todos os containers via Docker
@@ -82,7 +82,7 @@ Os dados para respostas mais precisas são recuperados do VectorDB (REDIS), colo
 - Aguardar todos os containers inicializarem.
 - No terminal execute o comando para finalizar todos os containers. 
 	```sh
-	docker-compose -f docker-compose.yml down
+	docker-compose -f docker-compose.yml down --volumes
 	```
 
 ## Instruções para utilizar os endpoints

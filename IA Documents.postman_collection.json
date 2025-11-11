@@ -110,7 +110,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8500/app/questions/3",
+					"raw": "http://localhost:8500/app/questions/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -119,7 +119,7 @@
 					"path": [
 						"app",
 						"questions",
-						"3"
+						"1"
 					]
 				}
 			},
@@ -131,7 +131,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8500/app/documents/3",
+					"raw": "http://localhost:8500/app/documents/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -140,7 +140,7 @@
 					"path": [
 						"app",
 						"documents",
-						"3"
+						"1"
 					]
 				}
 			},

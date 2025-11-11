@@ -13,7 +13,7 @@ services:
       - 11434:11434
     expose:
       - 11434
-    deploy:
+    deploy: #REMOVER SE SEU PC NÃO TIVER PLACA DE VÍDEO NVIDIA
       resources:
         reservations:
           devices:
@@ -33,7 +33,7 @@ services:
     container_name: ollama-models-pull
     image: curlimages/curl:latest
     command: >
-      http://ollama:11434/api/pull -d '{"name":"deepseek-r1:8b"}'
+      http://ollama:11434/api/pull -d '{"name":"llama3:8b"}'
     depends_on:
       ollama:
         condition: service_healthy

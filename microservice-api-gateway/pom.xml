@@ -15,7 +15,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-gateway</artifactId>
+			<artifactId>spring-cloud-starter-gateway-server-webflux</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
@@ -33,6 +33,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
+					<skip>true</skip>
 					<image>
 						<name>${user.docker.hub}/${project.artifactId}:${project.version}</name>
 						<env>

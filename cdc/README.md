@@ -2,7 +2,7 @@
 
 - Executar os seguintes comandos no console do container kafka:
 
-* Dentro do container do Kafka executar os seguintes comandos para criar consumidores de teste e visualizar os eventos:
+**Dentro do container do Kafka executar os seguintes comandos para criar consumidores de teste e visualizar os eventos:**
 ```
 cd opt/bitnami/kafka/bin
 

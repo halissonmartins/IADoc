@@ -1,12 +1,11 @@
 package com.halisson.iadoc_library.enums;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
-@AllArgsConstructor
 public enum EnumQuestionStatus {
 	
+	//TODO Use primitive int 
 	CREATED(1, "Imported"),
 	PROCESSING_STARTED(2, "Processing started"),
 	SUCCESSFULLY_ANSWERED(3, "Successfully answered"),
@@ -14,5 +13,10 @@ public enum EnumQuestionStatus {
 	
 	private Integer code;
 	private String description;
-
+	
+	private EnumQuestionStatus(Integer code, String description) {
+        this.code = code;
+        this.description = description;
+    }
+	
 }
