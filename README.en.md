@@ -1,7 +1,7 @@
 # IADoc - Microservices project with document upload, question processing using RAG from documents, and the use of Kafka, Debezium, CDC, Spring Batch, Spring Boot, Minio, Spring AI, Ollama, and Deepseek-r1 for accurate responses.
 The project consists of three main microservices: Application (document upload and question registration), Documents (document processing), and Questions (question processing).
 
-The application microservice is responsible for uploading PDF documents and registering questions about them via a REST API.
+The application microservice is responsible for uploading PDF documents and registering questions about them using a REST API.
 To replicate data to the document and question microservices, I used the CDC (Change Data Capture) strategy, utilizing Confluent Kafka Connect and the Debezium plugin for PostgreSQL.
 To optimize GPU usage, documents and questions are not processed in real time. They are stored and replicated to the respective microservices.
 In the document microservice, a JOB was created with Spring Batch to perform Retrieval-Augmented Generation (RAG) on documents and store them as vectors in REDIS.
@@ -10,7 +10,7 @@ For more accurate responses, data is retrieved from the VectorDB (REDIS), placed
 
 ## Tools and frameworks used
 - Ollama
-- Deepseek-r1
+- Llama3 or Deepseek-r1
 - Kafka
 - Confluent Kafka Connect
 - Debezium
@@ -28,7 +28,7 @@ For more accurate responses, data is retrieved from the VectorDB (REDIS), placed
 
 ## Programs that need to be installed and started beforehand
 - Docker Desktop
-- JAVA 21
+- JAVA 25
 - MAVEN
 
 ## Before starting execution
@@ -148,6 +148,5 @@ For more accurate responses, data is retrieved from the VectorDB (REDIS), placed
 - Document the code.
 - Write unit tests.
 - Modify the DockerCompose file via a template with the version when executing MAVEN.
-- Update the Spring AI version.
 - Create a condition based on an environment variable in the Bean to store in the directory or Minio.
 - In the Docker environment, correctly display the HATEOAS URL considering the API Gateway.
