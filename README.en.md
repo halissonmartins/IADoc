@@ -10,7 +10,7 @@ For more accurate responses, data is retrieved from the VectorDB (REDIS), placed
 
 ## Tools and frameworks used
 - Ollama
-- Deepseek-r1
+- Llama3 or Deepseek-r1
 - Kafka
 - Confluent Kafka Connect
 - Debezium
