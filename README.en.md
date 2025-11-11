@@ -148,6 +148,5 @@ For more accurate responses, data is retrieved from the VectorDB (REDIS), placed
 - Document the code.
 - Write unit tests.
 - Modify the DockerCompose file via a template with the version when executing MAVEN.
-- Update the Spring AI version.
 - Create a condition based on an environment variable in the Bean to store in the directory or Minio.
 - In the Docker environment, correctly display the HATEOAS URL considering the API Gateway.
