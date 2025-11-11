@@ -48,7 +48,7 @@ public class ChatService extends AbstractChatService{
 	}
 
 	private List<String> findSimilarDocuments(String message) {
-		List<Document> similarDocuments = vectorStore.similaritySearch(SearchRequest.query(message).withTopK(3));
-		return similarDocuments.stream().map(Document::getContent).toList();
+		List<Document> similarDocuments = vectorStore.similaritySearch(SearchRequest.builder().query(message).topK(3).build());
+		return similarDocuments.stream().map(Document::getText).toList();
 	}
 }

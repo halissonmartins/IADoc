@@ -79,7 +79,7 @@ For more accurate responses, data is retrieved from the VectorDB (REDIS), placed
 - Wait for all containers to initialize.
 - In the terminal, execute the command to stop all containers.
   ```sh
-  docker-compose -f docker-compose.yml down
+  docker-compose -f docker-compose.yml down --volumes
   ```
 
 ## Instructions for using the endpoints
