@@ -28,7 +28,7 @@ For more accurate responses, data is retrieved from the VectorDB (REDIS), placed
 
 ## Programs that need to be installed and started beforehand
 - Docker Desktop
-- JAVA 21
+- JAVA 25
 - MAVEN
 
 ## Before starting execution
