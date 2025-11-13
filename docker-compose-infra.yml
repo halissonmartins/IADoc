@@ -57,7 +57,7 @@ services:
       - iadoc_network
 
   postgres_application:
-    image: postgres:15
+    image: postgres:18
     restart: always
     environment:
       POSTGRES_DB: iadoc_application_db
@@ -82,7 +82,7 @@ services:
       - "wal_level=logical"
 
   postgres_document:
-    image: postgres:15
+    image: postgres:18
     restart: always
     environment:
       POSTGRES_DB: iadoc_document_db
@@ -107,7 +107,7 @@ services:
       - "wal_level=logical"
 
   postgres_question:
-    image: postgres:15
+    image: postgres:18
     restart: always
     environment:
       POSTGRES_DB: iadoc_question_db
