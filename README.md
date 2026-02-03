@@ -21,8 +21,6 @@
 - [Estrutura do Projeto](#-estrutura-do-projeto)
 - [Fluxo de Dados](#-fluxo-de-dados)
 - [Roadmap](#-roadmap)
-- [Contribuindo](#-contribuindo)
-- [Licença](#-licença)
 - [Contato e Suporte](#-contato-e-suporte)
 - [Referências](#-referências)
 
@@ -610,56 +608,12 @@ Cliente → API Gateway → Application Service → PostgreSQL
 - [ ] Geração de sumários automáticos
 - [ ] Exportação de respostas para PDF/DOCX
 
-## 🤝 Contribuindo
-
-Contribuições são muito bem-vindas! Para contribuir:
-
-1. **Fork o Projeto**
-2. **Crie uma Branch** para sua feature (`git checkout -b feature/MinhaFeature`)
-3. **Commit suas mudanças** (`git commit -m 'feat: Adiciona MinhaFeature'`)
-4. **Push para a Branch** (`git push origin feature/MinhaFeature`)
-5. **Abra um Pull Request**
-
-### Convenção de Commits
-
-Seguimos o [Conventional Commits](https://www.conventionalcommits.org/):
-
-- `feat:` Nova funcionalidade
-- `fix:` Correção de bug
-- `docs:` Documentação
-- `style:` Formatação de código
-- `refactor:` Refatoração
-- `test:` Testes
-- `chore:` Tarefas de manutenção
-
-### Código de Conduta
-
-Este projeto adota um Código de Conduta. Ao participar, você concorda em seguir suas diretrizes.
-
-## 📄 Licença
-
-Este projeto está licenciado sob a **GNU General Public License v3.0** - veja o arquivo [LICENSE](LICENSE) para detalhes.
-
-**Resumo da Licença**:
-- ✅ Uso comercial permitido
-- ✅ Modificação permitida
-- ✅ Distribuição permitida
-- ⚠️ Deve manter a mesma licença
-- ⚠️ Deve divulgar o código fonte
-- ⚠️ Deve incluir aviso de licença
-
 ## 📞 Contato e Suporte
 
 ### Autor
 **Halisson Martins**
 
 - GitHub: [@halissonmartins](https://github.com/halissonmartins)
-- LinkedIn: [linkedin.com/in/halissonmartins](https://linkedin.com/in/halissonmartins) *(ajuste se necessário)*
-- Email: *(adicione se desejar)*
-
-### Reportar Problemas
-
-Encontrou um bug ou tem uma sugestão? [Abra uma issue](https://github.com/halissonmartins/IADoc/issues/new).
 
 ### Recursos Úteis
 

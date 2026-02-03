@@ -21,8 +21,6 @@
 - [Project Structure](#-project-structure)
 - [Data Flow](#-data-flow)
 - [Roadmap](#-roadmap)
-- [Contributing](#-contributing)
-- [License](#-license)
 - [Contact and Support](#-contact-and-support)
 - [References](#-references)
 
@@ -610,56 +608,12 @@ Client → API Gateway → Application Service → PostgreSQL
 - [ ] Automatic summary generation
 - [ ] Export answers to PDF/DOCX
 
-## 🤝 Contributing
-
-Contributions are very welcome! To contribute:
-
-1. **Fork the Project**
-2. **Create a Branch** for your feature (`git checkout -b feature/MyFeature`)
-3. **Commit your changes** (`git commit -m 'feat: Add MyFeature'`)
-4. **Push to the Branch** (`git push origin feature/MyFeature`)
-5. **Open a Pull Request**
-
-### Commit Convention
-
-We follow [Conventional Commits](https://www.conventionalcommits.org/):
-
-- `feat:` New feature
-- `fix:` Bug fix
-- `docs:` Documentation
-- `style:` Code formatting
-- `refactor:` Refactoring
-- `test:` Tests
-- `chore:` Maintenance tasks
-
-### Code of Conduct
-
-This project adopts a Code of Conduct. By participating, you agree to follow its guidelines.
-
-## 📄 License
-
-This project is licensed under the **GNU General Public License v3.0** - see the [LICENSE](LICENSE) file for details.
-
-**License Summary**:
-- ✅ Commercial use allowed
-- ✅ Modification allowed
-- ✅ Distribution allowed
-- ⚠️ Must maintain same license
-- ⚠️ Must disclose source code
-- ⚠️ Must include license notice
-
 ## 📞 Contact and Support
 
 ### Author
 **Halisson Martins**
 
 - GitHub: [@halissonmartins](https://github.com/halissonmartins)
-- LinkedIn: [linkedin.com/in/halissonmartins](https://linkedin.com/in/halissonmartins) *(adjust if needed)*
-- Email: *(add if you wish)*
-
-### Report Issues
-
-Found a bug or have a suggestion? [Open an issue](https://github.com/halissonmartins/IADoc/issues/new).
 
 ### Useful Resources
 
