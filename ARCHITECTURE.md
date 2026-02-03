@@ -56,7 +56,6 @@ graph TB
     subgraph "Camada de IA"
         Ollama[Ollama Runtime]
         Llama3[Llama 3 Model]
-        Llamma3[Llamma 3 Model]
     end
     
     Client --> Gateway
