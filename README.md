@@ -585,7 +585,7 @@ Cliente → API Gateway → Application Service → PostgreSQL
 - [x] API Gateway e Service Discovery
 
 ### 🚧 Em Desenvolvimento
-- [ ] Testes unitários e de integração
+- [x] Testes unitários e de integração
 - [ ] Documentação do código (JavaDoc)
 - [ ] Criação automática de tabelas Spring Batch via DDL
 
