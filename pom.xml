@@ -25,6 +25,7 @@
 		<spring-doc.version>2.8.13</spring-doc.version>
 		<minio.version>8.6.0</minio.version>
 		<lombok.version>1.18.42</lombok.version>
+		<jacoco-maven-plugin.version>0.8.14</jacoco-maven-plugin.version>
 		<user.docker.hub>halissonmartins</user.docker.hub>
 	</properties>
 
