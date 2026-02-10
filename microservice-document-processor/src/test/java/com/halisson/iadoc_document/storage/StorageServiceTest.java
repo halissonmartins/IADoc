@@ -34,8 +34,8 @@ class FileSystemStorageServiceTest {
     @BeforeEach
     void setUp(@TempDir Path tempDirectory) throws IOException {
         tempDir = tempDirectory;
-        ReflectionTestUtils.setField(storageService = new FileSystemStorageService(), 
-            "receivedDir", tempDir.toString());
+        ReflectionTestUtils.setField(storageService = new FileSystemStorageService(),
+                "receivedDir", tempDir.toString());
 
         // Create a test file
         Path testFile = tempDir.resolve("test-document.pdf");
@@ -53,8 +53,8 @@ class FileSystemStorageServiceTest {
 
     @Test
     void testLoadAsResource_FileNotExists_ShouldThrowException() {
-        assertThrows(RuntimeException.class, 
-            () -> storageService.loadAsResource("non-existent.pdf"));
+        assertThrows(RuntimeException.class,
+                () -> storageService.loadAsResource("non-existent.pdf"));
     }
 }
 
@@ -75,19 +75,20 @@ class MinioStorageServiceTest {
     @Test
     void testLoadAsResource_Success() throws Exception {
 
-    	// 1. Seus dados em memória
-    	ByteArrayInputStream inputStream = new ByteArrayInputStream("test content".getBytes());
-        
+        // 1. Seus dados em memória
+        ByteArrayInputStream inputStream = new ByteArrayInputStream("test content".getBytes());
+
         // 2. Criar o GetObjectResponse manualmente
-        // Assinatura: GetObjectResponse(Headers headers, String bucket, String region, String object, InputStream body)
+        // Assinatura: GetObjectResponse(Headers headers, String bucket, String region,
+        // String object, InputStream body)
         GetObjectResponse response = new GetObjectResponse(
-            Headers.of("Content-Type", "application/octet-stream"), // Headers (okhttp3)
-            "meu-bucket",        // Nome do bucket
-            "us-east-1",         // Região
-            "arquivo.txt",       // Nome do objeto
-            inputStream                 // O seu ByteArrayInputStream
+                Headers.of("Content-Type", "application/octet-stream"), // Headers (okhttp3)
+                "meu-bucket", // Nome do bucket
+                "us-east-1", // Região
+                "arquivo.txt", // Nome do objeto
+                inputStream // O seu ByteArrayInputStream
         );
-        
+
         when(minioClient.getObject(any(GetObjectArgs.class))).thenReturn(response);
 
         Resource resource = storageService.loadAsResource("test-document.pdf");
@@ -98,9 +99,18 @@ class MinioStorageServiceTest {
     }
 
     @Test
-    void testLoadAsResource_MinioException_ShouldThrowRuntimeException() throws Exception {
+    void testLoadAsResource_IOException_ShouldThrowRuntimeException() throws Exception {
         when(minioClient.getObject(any(GetObjectArgs.class)))
-            .thenThrow(new RuntimeException("Minio error"));
+            .thenThrow(new IOException("Minio error"));
+
+        assertThrows(RuntimeException.class, 
+            () -> storageService.loadAsResource("test-document.pdf"));
+    }
+
+    @Test
+    void testLoadAsResource_IllegalArgumentException_ShouldThrowRuntimeException() throws Exception {
+        when(minioClient.getObject(any(GetObjectArgs.class)))
+            .thenThrow(new IllegalArgumentException("Minio error"));
 
         assertThrows(RuntimeException.class, 
             () -> storageService.loadAsResource("test-document.pdf"));
