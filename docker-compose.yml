@@ -130,7 +130,7 @@ services:
       - iadoc_network
 
   kafka:
-    image: 'bitnami/kafka:latest'
+    image: 'soldevelo/kafka:latest'
     environment:
       - KAFKA_CFG_NODE_ID=0
       - KAFKA_CFG_PROCESS_ROLES=controller,broker
@@ -234,7 +234,7 @@ services:
       - iadoc_network
 
   minio:
-    image: docker.io/bitnami/minio:latest
+    image: docker.io/soldevelo/minio:latest
     environment:
       - MINIO_ROOT_USER=minioadmin
       - MINIO_ROOT_PASSWORD=minioadmin
